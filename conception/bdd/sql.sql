@@ -30,6 +30,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`role_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
+        `rang` INT(100) NOT NULL,
         `role` JSON NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
@@ -417,12 +418,12 @@ VALUES
 
 /* ----------role */
 INSERT INTO
-    role_type (role)
+    role_type (rang,role)
 VALUES
-    ('{"role":"USER_ROLE"}'),
-    ('{"role":"ADMIN_ROLE"}'),
-    ('{"role":"CAISSE_ROLE"}'),
-    ('{"role":"SAV_ROLE"}');
+    (0,'{"role":"USER_ROLE"}'),
+    (1,'{"role":"ADMIN_ROLE"}'),
+    (2,'{"role":"CAISSE_ROLE"}'),
+    (3,'{"role":"SAV_ROLE"}');
 
 /* ----------role */
 INSERT INTO
