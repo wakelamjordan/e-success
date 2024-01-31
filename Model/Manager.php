@@ -1,9 +1,23 @@
 <?php
 
-require_once("Config/parametre.php");
+require_once("../Config/parametre.php");
 class Manager{
 
     public function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
+
+        $dns="mysql:host=$host;dbname=$dbname;charset=utf8";
+    
+        try {
+            $pdo = new PDO($dns, $user, $password);
+            return $pdo;
+        } catch(PDOException $e) {
+            echo "<h1>Erreur de connexion à la base de données: " . $e->getMessage() . "</h1>";
+            die;
+        }
+    }
+    
+
+    /*public function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
 
         $dns="mysql:host=$host;dbname=$dbname;charset=ut8";
 
@@ -13,11 +27,11 @@ class Manager{
 
                 return $pdo;
         }
-        cacth(Exception $e){
+        catch(Exception $e){
             echo "<h1>Vous avez un probleme de connexion!! veuillez verifier vos parametres de connexion!! </h1>";
             die;
         }
-    }
+    }*/
 
     function findAllByConditionTable($table,$dataCondition=[],$order='',$type='obj'){// order assure le clasement du resultats
 
