@@ -12,10 +12,103 @@ class UserController extends MyFct{
            case'liste':
             $this->liste();
             break;
+            case'show':
+                $this->afficher($id);
+                break;
+            case'modify':
+                $this->modifier($id);
+                break;
+            case'insert':
+                break;
                 
         }
     }
 ///-----------------------------------------------------------------
+    function inserer(){
+          $user=new User(); 
+          $user->setRoles(['ROLE_USER']);     
+          $disabled="";
+          $this->generateFormUser($user,$disabled);
+    }
+    function modifier($id){
+
+        $um = new UserManager();
+
+        $user=$um->findById($id);
+
+        $user_roles=$user->getRoles();
+        $user_roles=json_decode($user_roles, true);//? pourquoi true?
+
+        $user->setRoles($user_roles);
+
+        $disabled='';
+
+        $this->generateFrom($user,$disabled);
+    }
+
+    function afficher($id){
+
+        $um = new UserManager();
+
+        $user=$um->findById($id);
+
+        $user_roles=$user->getRoles();
+        $user_roles=json_decode($user_roles, true);//? pourquoi true?
+
+        $user->setRoles($user_roles);
+
+        $disabled='disabled';
+
+        $this->generateFrom($user,$disabled);
+    }
+
+    function generateFrom($user,$disabled){
+
+        $photo=$user->getPhoto();
+
+        $user_roles=$user->getRoles();
+
+        if(!$photo){
+            $photo="fakePhoto.jpg";
+        }
+
+        $rm = new RoleManager();
+
+        $myRoles = $rm->findAll();
+
+        $roles=[];
+
+        foreach($myRoles as $value){
+
+            $libelle=$value['libelle'];
+
+            if(in_array($libelle,$user_roles)){
+                $checked="checked";
+            }
+            else{
+
+                $checked="";
+            }
+
+            $role[]=['libelle'=>$libelle,'checked'=>$checked];
+        }
+
+        $variables=[
+            'photo'=>$photo,
+            'roles'=>$roles,
+            'id'=>$user->getId(),
+            'login'=>$user->getLogin(),
+            'mail'=>$user->getMail(),
+            'disabled'=>$disabled,
+            'password'=>'',
+
+        ];
+
+        $file="../View/user/formFile.html.php";
+
+        $this->generatePage($file,$variables);
+    }
+
     function liste(){
 
         $um = new UserManager();

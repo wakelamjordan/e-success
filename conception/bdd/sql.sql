@@ -986,3 +986,5 @@ FROM
 WHERE
     v.id=u.id_people;
 
+alter table role_type change role  libelle  json;
+

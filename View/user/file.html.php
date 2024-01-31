@@ -7,10 +7,11 @@
     <table >
         <thead >
             <tr>
-                <th">ID</th>
-                <th >CODE</th>
-                <th >NOM</th>
-                <th >ADRESSE</th>
+                <th>ID</th>
+                <th>PHOTO</th>
+                <th >LOGIN</th>
+                <th >MAIL</th>
+                <th >PASSWORD</th>
                 <th >ACTIONS</th>
             </tr>
         </thead>
@@ -18,12 +19,13 @@
             <?php foreach($lignes as $ligne): ?>
                 <tr>
                     <td><?=$ligne['id']?></td>
+                    <td><img src="../Public/upload/<?=$ligne['photo']?>" width="50px"></td>
                     <td><?=$ligne['login']?></td>
                     <td><?=$ligne['mail']?></td>
                     <td><?=$ligne['password']?></td>
                     <td >
-                        <a>Afficher</a>
-                        <a >Modifier</a>
+                        <a href="user&action=show&id=<?=$ligne['id']?>">Afficher</a>
+                        <a href="user&action=modify&id=<?=$ligne['id']?>">Modifier</a>
                         <button>Supprimer</button>
                     </td>
                 </tr>

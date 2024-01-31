@@ -210,6 +210,7 @@ class Manager{
         $requete->execute( [ $id ] );
         // Executer la requete avec id = $id
         // Mettre dans $article l'article trouvé
+        $resultat = $requete->fetch();
         return $resultat;
     }
 

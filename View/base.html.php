@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./Public/style/bootstrap-5.3.2-dist/css/bootstrap.css">
     <link rel="stylesheet" href="./Public/style/style.css">
     <script src="../Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../Public/js/myScript.js" defer></script>
 </head>
 
 <body class="">
