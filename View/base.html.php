@@ -42,7 +42,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Article</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="#">Liste</a>
-                                <a class="dropdown-item" href="#">Ajout article</a>
+                                <a class="dropdown-ite" href="#">Ajout article</a>
                             </div>
                         </li>
                     </ul>
