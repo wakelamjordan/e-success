@@ -1,16 +1,17 @@
 <div>
     <h1 >LISTE DES </h1>
-    <div >
-        <a >Nouveau Client</a>
-        <a >Imprimer</a>
+    <div>
+        <a href="user&action=insert"  >Nouveau User</a>
+        <a href="javascript:window.print()">Imprimer</a>
     </div>
     <table >
         <thead >
             <tr>
-                <th">ID</th>
-                <th >CODE</th>
-                <th >NOM</th>
-                <th >ADRESSE</th>
+                <th>ID</th>
+                <th>PHOTO</th>
+                <th >LOGIN</th>
+                <th >MAIL</th>
+               
                 <th >ACTIONS</th>
             </tr>
         </thead>
@@ -18,13 +19,13 @@
             <?php foreach($lignes as $ligne): ?>
                 <tr>
                     <td><?=$ligne['id']?></td>
+                    <td><img src="upload/<?=$ligne['photo']?>" width="50px"></td>
                     <td><?=$ligne['login']?></td>
                     <td><?=$ligne['mail']?></td>
-                    <td><?=$ligne['password']?></td>
                     <td >
-                        <a>Afficher</a>
-                        <a >Modifier</a>
-                        <button>Supprimer</button>
+                        <a href="user&action=show&id=<?=$ligne['id']?>">Afficher</a>
+                        <a href="user&action=modify&id=<?=$ligne['id']?>">Modifier</a>
+                        <button onclick="supprimer(<?=$ligne['id']?>)">Supprimer</button>
                     </td>
                 </tr>
             <?php endforeach;?>
@@ -36,4 +37,13 @@
         </tfoot>
     </table>
 </div>
+
+<script>
+    function supprimer(id){
+    const response=confirm("Voulez-vous bien supprimer ce user?");
+    if(response){
+        document.location.href="user&action=delete&id="+id;
+    }
+  }
+</script>
 
