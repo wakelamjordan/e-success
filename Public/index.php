@@ -13,7 +13,8 @@
     if(file_exists($fileController)){ 
         $x=new $nameController(); 
     }else{
-        $x=new AcceuilController;
+        // si aucun controller est trouvé on est redirigé directement vers acceuilController
+        header('location:acceuil');
         // echo "<h1>Le fichier $fileController n'existe pas!!!!!</h1>";  
         // die;
     }

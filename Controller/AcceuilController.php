@@ -3,7 +3,9 @@
 class AcceuilController{
     function __construct()
     {
-        // echo 'page';
-        require '../View/base.html.php';
+        $page=new MyFct;
+        $file='../View/acceuil/file.html.php';
+        $variables=[];
+        $page->generatePage($file,$variables);
     }
 }
