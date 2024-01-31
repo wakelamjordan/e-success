@@ -36,7 +36,7 @@ class MyFct{
         }
     }
     
-    function generatePage($file,$variables=[],$base="View/base-bs.html.php"){  
+    function generatePage($file,$variables=[],$base="View/base.html.php"){  
         if(file_exists($file)){   
           
             extract($variables);

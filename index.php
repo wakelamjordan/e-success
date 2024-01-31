@@ -1,8 +1,9 @@
 <?php
     require_once("Service/extra.php");
     spl_autoload_register('charger');
-    $path='accueil';  
+    $path='acceuil';  
     extract($_GET);  
+    
     $nameController=ucfirst($path)."Controller"; 
                                                  
     $fileController="Controller/$nameController.php"; 
