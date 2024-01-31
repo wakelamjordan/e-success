@@ -31,7 +31,7 @@ CREATE TABLE
     IF NOT EXISTS `e_success`.`role_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `rang` INT (100) NOT NULL,
-        `role` JSON NOT NULL,
+        `libelle` JSON NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
@@ -85,7 +85,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`photo` (
         `id` INT (12) NULL AUTO_INCREMENT PRIMARY KEY,
-        `path_photo` VARCHAR(255) NOT NULL,
+        `path_photo` VARCHAR(255) NOT NULL DEFAULT 'user_default.svg',
         `id_news` INT (12) UNIQUE,
         `id_article` INT (12) UNIQUE,
         FOREIGN KEY (`id_news`) REFERENCES `e_success`.`news` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -99,7 +99,7 @@ CREATE TABLE
         `surname` VARCHAR(50) NOT NULL,
         `date_birth` DATE NOT NULL,
         `place_birth` VARCHAR(50) NOT NULL,
-        `id_photo` INT (12) UNIQUE,
+        `id_photo` INT (12) DEFAULT 1,
         `id_collaborateur_type` INT (12),
         `id_civility_type` INT (12) NOT NULL,
         FOREIGN KEY (`id_photo`) REFERENCES `e_success`.`photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -457,22 +457,14 @@ VALUES
     ('portable'),
     ('fixe');
 
------------------------------------------------------------
-INSERT INTO
-    `e_success`.`photo` (`path_photo`)
+    --------------------people
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
 VALUES
-    ('path_to_photo_1.jpg'),
-    ('path_to_photo_2.jpg'),
-    ('path_to_photo_3.jpg'),
-    ('path_to_photo_4.jpg'),
-    ('path_to_photo_5.jpg'),
-    ('path_to_photo_6.jpg'),
-    ('path_to_photo_7.jpg'),
-    ('path_to_photo_8.jpg'),
-    ('path_to_photo_9.jpg'),
-    ('path_to_photo_10.jpg');
+    ('photo1.jpg');
 
--- Créer 10 personnes
+SET @last_photo_id=LAST_INSERT_ID();
+
 INSERT INTO
     `e_success`.`people` (
         `name`,
@@ -484,72 +476,269 @@ INSERT INTO
         `id_civility_type`
     )
 VALUES
-    ('John', 'Doe', '1990-01-15', 'New York', 1, 1, 1),
+    ('John', 'Doe', '1990-01-15', 'New York', @last_photo_id,(select id from collaborateur_type WHERE libelle like'CDI'), (select id from civility_type where libelle like 'Homme'));
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo2.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_collaborateur_type`,
+        `id_civility_type`
+    )
+VALUES
+    ('Jane','Doe','1992-05-20','Los Angeles', @last_photo_id,(select id from collaborateur_type WHERE libelle like'CDD'), (select id from civility_type where libelle like 'Femme');
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo3.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_collaborateur_type`,
+        `id_civility_type`
+    )
+VALUES
+    ('Bob', 'Smith', '1985-08-10', 'Chicago', @last_photo_id,(select id from collaborateur_type WHERE libelle like'Interim'), (select id from civility_type where libelle like 'Homme');
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_collaborateur_type`,
+        `id_civility_type`
+    )
+VALUES
+    ('Alice','Johnson','1988-03-25','Houston',(select id from collaborateur_type WHERE libelle like'CDI'), (select id from civility_type where libelle like 'Femme');
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_collaborateur_type`,
+        `id_civility_type`
+    )
+VALUES
+    ('John', 'Doe', '1990-01-15', 'New York',(select id from collaborateur_type WHERE libelle like'Freelance'), (select id from civility_type where libelle like 'Homme');
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    (photo5.jpg);
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_civility_type`
+    )
+VALUES
+    ('David', 'Brown', '1993-12-01', 'Miami', @last_photo_id,(select id from civility_type where libelle like 'Homme');
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_civility_type`
+    )
+VALUES
+    ('Emily','White','1980-06-18','San Francisco',(select id from civility_type where libelle like 'Femme');
+
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo7.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_civility_type`
+    )
+VALUES
+    ('Michael','Jones','1995-09-30','Boston', @last_photo_id,(select id from civility_type where libelle like 'Homme');
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo8.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_civility_type`
+    )
+VALUES
+    ('Emma','Miller','1987-04-12','Seattle', @last_photo_id, (select id from civility_type where libelle like 'Femme');
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo9.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_civility_type`
+    )
+VALUES
+    ('Christopher','Taylor','1982-11-08','Denver', @last_photo_id, (select id from civility_type where libelle like 'Homme');
+
+
+
+
+
+
+
+/* fin 1 people */
+INSERT INTO 
+    `e_success`.`photo`(`path_photo`)
+VALUES
+    ('photo10.jpg');
+
+SET @last_photo_id=LAST_INSERT_ID();
+
+INSERT INTO
+    `e_success`.`people` (
+        `name`,
+        `surname`,
+        `date_birth`,
+        `place_birth`,
+        `id_photo`,
+        `id_civility_type`
+    )
+VALUES
+    ('Olivia','Wilson','1991-07-05','Austin', @last_photo_id,(select id from civility_type where libelle like '');
+
+
+
+
+
+
+
+/* fin 1 people */
+    )
+VALUES
+    ,
+    
     (
-        'Jane',
-        'Doe',
-        '1992-05-20',
-        'Los Angeles',
-        2,
-        NULL,
-        2
-    ),
-    ('Bob', 'Smith', '1985-08-10', 'Chicago', 3, 3, 1),
-    (
-        'Alice',
-        'Johnson',
-        '1988-03-25',
-        'Houston',
-        4,
-        NULL,
-        2
-    ),
-    ('David', 'Brown', '1993-12-01', 'Miami', 5, 2, 1),
-    (
-        'Emily',
-        'White',
-        '1980-06-18',
-        'San Francisco',
+        'Emily','White','1980-06-18','San Francisco',
         6,
         NULL,
-        2
+        (select id from civility_type where libelle like 'Femme')
     ),
     (
-        'Michael',
-        'Jones',
-        '1995-09-30',
-        'Boston',
+        'Michael','Jones','1995-09-30','Boston',
         7,
         1,
-        1
+        (select id from civility_type where libelle like 'Homme')
     ),
     (
-        'Emma',
-        'Miller',
-        '1987-04-12',
-        'Seattle',
-        8,
-        NULL,
-        2
+        'Emma','Miller','1987-04-12','Seattle',
     ),
-    (
-        'Christopher',
-        'Taylor',
-        '1982-11-08',
-        'Denver',
-        9,
-        3,
-        1
+    ('Christopher','Taylor','1982-11-08','Denver',
     ),
-    (
-        'Olivia',
-        'Wilson',
-        '1991-07-05',
-        'Austin',
-        10,
-        NULL,
-        2
-    );
+    ('Olivia','Wilson','1991-07-05','Austin',
+
 
 -- Ajouter des nationalités aux personnes
 INSERT INTO
