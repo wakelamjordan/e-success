@@ -1,8 +1,8 @@
 <?php
 
 const HOST="127.0.0.1";
-const DBNAME="dwwm";
+const DBNAME="e_success";
 const USER="admin";
-const PASSWORD="";
+const PASSWORD="4321";
 
 ?>
