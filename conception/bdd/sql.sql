@@ -30,7 +30,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`role_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
-        `rang` INT(100) NOT NULL,
+        `rang` INT (100) NOT NULL,
         `role` JSON NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
@@ -114,6 +114,7 @@ CREATE TABLE
         `mail` VARCHAR(255) NOT NULL,
         `password` VARCHAR(255) NOT NULL,
         `id_people` INT NOT NULL UNIQUE,
+        `roles` JSON NOT NULL,
         FOREIGN KEY (`id_people`) REFERENCES `e_success`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
@@ -167,14 +168,13 @@ CREATE TABLE
         FOREIGN KEY (`id_people`) REFERENCES `e_success`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
-CREATE TABLE
+/* CREATE TABLE
     IF NOT EXISTS `e_success`.`roles` (
         `id` INT (12) NULL AUTO_INCREMENT PRIMARY KEY,
         `id_user` INT NOT NULL UNIQUE,
-        `id_role_type` INT NOT NULL UNIQUE,
-        FOREIGN KEY (`id_user`) REFERENCES `e_success`.`user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-        FOREIGN KEY (`id_role_type`) REFERENCES `e_success`.`role_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+        `roles` JSON NOT NULL,
+        FOREIGN KEY (`id_user`) REFERENCES `e_success`.`user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci; */
 
 CREATE TABLE
     IF NOT EXISTS `e_success`.`user_data` (
@@ -418,12 +418,21 @@ VALUES
 
 /* ----------role */
 INSERT INTO
-    role_type (rang,role)
+    role_type (rang, role)
 VALUES
-    (0,'{"role":"USER_ROLE"}'),
-    (1,'{"role":"ADMIN_ROLE"}'),
-    (2,'{"role":"CAISSE_ROLE"}'),
-    (3,'{"role":"SAV_ROLE"}');
+    (0, '{
+        "user":"USER_ROLE"
+    }'),
+    (1, '{
+        "admin":"ADMIN_ROLE"
+    }'),
+    (2, '{
+        "caisse":"CAISSE_ROLE"
+    }
+    '),
+    (3, '{
+        "sav":"SAV_ROLE"
+    }');
 
 /* ----------role */
 INSERT INTO
@@ -559,23 +568,24 @@ VALUES
 
 -- Créer des comptes utilisateur avec le mot de passe "1234"
 INSERT INTO
-    `e_success`.`user` (`login`, `mail`, `password`, `id_people`)
+    `e_success`.`user` (`login`, `mail`, `password`, `id_people`,`roles`)
 VALUES
-    ('john_doe', 'john@example.com', '1234', 1),
-    ('jane_doe', 'jane@example.com', '1234', 2),
-    ('bob_smith', 'bob@example.com', '1234', 3),
-    ('alice_johnson', 'alice@example.com', '1234', 4),
-    ('david_brown', 'david@example.com', '1234', 5),
-    ('emily_white', 'emily@example.com', '1234', 6),
-    ('michael_jones', 'michael@example.com', '1234', 7),
-    ('emma_miller', 'emma@example.com', '1234', 8),
+        
+    ('john_doe', 'john@example.com', '1234', 1,'{"user":"USER_ROLE", "caisse":"CAISSE_ROLE"}'),
+    ('jane_doe', 'jane@example.com', '1234', 2,'{"user":"USER_ROLE"}', "sav":"SAV_ROLE"}'),
+    ('bob_smith', 'bob@example.com', '1234', 3,'{"user":"USER_ROLE"}'),
+    ('alice_johnson', 'alice@example.com', '1234', 4,'{"user":"USER_ROLE"}'),
+    ('david_brown', 'david@example.com', '1234', 5,'{"user":"USER_ROLE"}'),
+    ('emily_white', 'emily@example.com', '1234', 6,'{"user":"USER_ROLE"}'),
+    ('michael_jones', 'michael@example.com', '1234', 7,'{"user":"USER_ROLE"}'),
+    ('emma_miller', 'emma@example.com', '1234', 8,'{"user":"USER_ROLE"}'),
     (
         'christopher_taylor',
         'christopher@example.com',
         '1234',
-        9
+        9,'{"user":"USER_ROLE"}'
     ),
-    ('olivia_wilson', 'olivia@example.com', '1234', 10);
+    ('olivia_wilson', 'olivia@example.com', '1234', 10,'{"user":"USER_ROLE"}');
 
 -- Créer des adresses pour chaque personne
 INSERT INTO
@@ -836,13 +846,37 @@ VALUES
     ('2025-01-08', 2, 5);
 
 -- Attribution des rôles à quatre comptes dans la table roles
-INSERT INTO
-    roles (id_user, id_role_type)
+/* INSERT INTO
+    roles (id_user, roles)
 VALUES
-    (1, 1), -- Associez l'utilisateur 1 au rôle USER_ROLE (ajustez l'ID de l'utilisateur et du rôle)
-    (2, 2), -- Associez l'utilisateur 2 au rôle ADMIN_ROLE
-    (3, 3), -- Associez l'utilisateur 3 au rôle CAISSE_ROLE
-    (4, 4);
+    (1, '{"user":"USER_ROLE"}'),
+    (2, '{
+        "user":"USER_ROLE",
+    }'),
+    (3, '{
+        "user":"USER_ROLE",
+    }'),
+    (4, '{
+        "user":"USER_ROLE",
+    }'),
+    (5, '{
+        "user":"USER_ROLE",
+    }'),
+    (6, '{
+        "user":"USER_ROLE",
+    }'),
+    (7, '{
+        "user":"USER_ROLE",
+    }'),
+    (8, '{
+        "user":"USER_ROLE",
+    }'),
+    (9, '{
+        "user":"USER_ROLE",
+    }'),
+    (10, '{
+        "user":"USER_ROLE",
+    }'); */
 
 -- Associez l'utilisateur 4 au rôle SAV_ROLE
 /* select all people */
@@ -940,7 +974,7 @@ select
     u.login login,
     u.mail mail,
     u.password password,
-    rt.role role
+    r.roles roles
 from
     user u,
     roles r,

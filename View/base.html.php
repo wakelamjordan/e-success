@@ -25,13 +25,17 @@
             <li><a href="acceuil">ACCEUIL</a></li>
             <li><a href="#" class="">PRODUIT</a></li>
             <li><a href="#">MON COMPTE</a></li>
-            <li><a href="#">PARAMETRE</a>
-            <ul><a href="#"></a>USER</ul>
-            <ul><a href="#"></a>ROLE</ul>
+            <li><a href="">PARAMETRE</a>
+            <ul><a href="user">USER</a></ul>
+            <ul><a href="role">ROLE</a></ul>
             </li>
         </ul>
     </nav>
 </main>
+
+<div class="main">
+    <?=$content?>
+</div>
 
 <footer>
     
