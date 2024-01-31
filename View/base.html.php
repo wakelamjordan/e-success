@@ -39,7 +39,7 @@
 
 <footer>
     
-    <p>CopyRight by E-Success</p>
+    <p>CopyRight by B-Success</p>
 
     
 </footer>
