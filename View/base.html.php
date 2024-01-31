@@ -39,7 +39,7 @@
 
 <footer>
     
-    <p>CopyRight by B-Success</p>
+    <p>CopyRight by A-Success</p>
 
     
 </footer>
