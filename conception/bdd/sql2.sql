@@ -40,7 +40,7 @@ CREATE TABLE
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
 CREATE TABLE
-    IF NOT EXISTS `dbName`.`stat_commande` (
+    IF NOT EXISTS `dbName`.`state_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `libelle` VARCHAR(255) NOT NULL UNIQUE,
         PRIMARY KEY (`id`)
@@ -111,3 +111,72 @@ CREATE TABLE
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`user` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `login` VARCHAR(255) NOT NULL UNIQUE,
+        `mail` VARCHAR(255) NOT NULL UNIQUE,
+        `password` VARCHAR(255) NOT NULL,
+        `roles` JSON NOT NULL,
+        `new_mail` VARCHAR(255),
+        `last_connexion` DATETIME DEFAULT NOW (),
+        `code_new_mail` INT (12),
+        `date_create` DATETIME NOT NULL,
+        `id_people` INT (12) NOT NULL UNIQUE,
+        FOREIGN KEY (`id_people`) REFERENCES `dbName`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`address` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `no` DECIMAL(10.2) NOT NULL,
+        `address_line` VARCHAR(255) NOT NULL,
+        `street` VARCHAR(255) NOT NULL,
+        `city` VARCHAR(255) NOT NULL,
+        `postal_code` INT (12) NOT NULL,
+        `state` VARCHAR(255) NOT NULL,
+        `country` VARCHAR(255) NOT NULL,
+        `id_people` INT (12) NOT NULL,
+        FOREIGN KEY (`id_people`) REFERENCES `dbName`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`commande` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `id_people` INT (12) NOT NULL,
+        FOREIGN KEY (`id_people`) REFERENCES `dbName`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`article_commande` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `price` DECIMAL(10.2) NOT NULL,
+        `id_article` INT (12) NOT NULL,
+        `id_commande` INT (12) NOT NULL,
+        FOREIGN KEY (`id_article`) REFERENCES `dbName`.`article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`id_commande`) REFERENCES `dbName`.`commande` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`state_commande` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `id_commande` INT (12) NOT NULL,
+        `id_state_type` INT (12) NOT NULL,
+        `date_state` DATETIME DEFAULT NOW (),
+        FOREIGN KEY (`id_commande`) REFERENCES `dbName`.`commande` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (`id_state_type`) REFERENCES `dbName`.`state_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+
+CREATE TABLE
+    IF NOT EXISTS `dbName`.`phone` (
+        `id` INT (12) NULL AUTO_INCREMENT,
+        `phone_number` VARCHAR(255) NOT NULL UNIQUE,
+        `id_people` INT (12) NOT NULL,
+        FOREIGN KEY (`id_people`) REFERENCES `dbName`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        PRIMARY KEY (`id`)
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
