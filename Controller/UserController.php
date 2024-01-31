@@ -18,10 +18,14 @@ class UserController extends MyFct{
 ///-----------------------------------------------------------------
     function liste(){
 
-        $um = new UserManager();
 
+        
+        $um = new UserManager();
+        
         $users=$um->findAll();
-       
+
+        // print_r($um);
+        // die;
         // dans file on va préparer notre tableau pour acceuillir la liste
         $file = '../View/user/file.html.php';
         // dans variable il faudra les différentes variables nécéssaire à file pour créer le tableau

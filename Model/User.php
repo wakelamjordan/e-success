@@ -1,19 +1,26 @@
 <?php
 
-class User{
+class User extends UserManager
+{
 
     private $id;
     private $login;
     private $mail;
     private $password;
-    private $id_people;
+    private $last_connexion;
+    private $date_create;
+    private $photo;
+    private $user_all;
 
 
-    public function __construct($data = [] ){
-        if($data){
-            foreach($data as $key=>$valeur){
-                $set='set'.ucfirst($key);
-                if(method_exists($this,$set)){
+
+    public function __construct($data = [])
+    {
+
+        if ($data) {
+            foreach ($data as $key => $valeur) {
+                $set = 'set' . ucfirst($key);
+                if (method_exists($this, $set)) {
                     $this->$set($valeur);
                 }
             }
@@ -22,7 +29,7 @@ class User{
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -32,7 +39,7 @@ class User{
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -42,7 +49,7 @@ class User{
 
     /**
      * Get the value of login
-     */ 
+     */
     public function getLogin()
     {
         return $this->login;
@@ -52,7 +59,7 @@ class User{
      * Set the value of login
      *
      * @return  self
-     */ 
+     */
     public function setLogin($login)
     {
         $this->login = $login;
@@ -62,7 +69,7 @@ class User{
 
     /**
      * Get the value of mail
-     */ 
+     */
     public function getMail()
     {
         return $this->mail;
@@ -72,7 +79,7 @@ class User{
      * Set the value of mail
      *
      * @return  self
-     */ 
+     */
     public function setMail($mail)
     {
         $this->mail = $mail;
@@ -82,7 +89,7 @@ class User{
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -92,7 +99,7 @@ class User{
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -101,21 +108,82 @@ class User{
     }
 
     /**
-     * Get the value of id_people
-     */ 
-    public function getId_people()
+     * Get the value of last_connexion
+     */
+    public function getLast_connexion()
     {
-        return $this->id_people;
+        return $this->last_connexion;
     }
 
     /**
-     * Set the value of id_people
+     * Set the value of last_connexion
      *
      * @return  self
-     */ 
-    public function setId_people($id_people)
+     */
+    public function setLast_connexion($last_connexion)
     {
-        $this->id_people = $id_people;
+        $this->last_connexion = $last_connexion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date_create
+     */
+    public function getDate_create()
+    {
+        return $this->date_create;
+    }
+
+    /**
+     * Set the value of date_create
+     *
+     * @return  self
+     */
+    public function setDate_create($date_create)
+    {
+        $this->date_create = $date_create;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     *
+     * @return  self
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of user_all
+     */
+    public function getUser_all()
+    {
+        $this->user_all = $this->listTable('V_people_all');
+        return $this->user_all;
+    }
+
+    /**
+     * Set the value of user_all
+     *
+     * @return  self
+     */
+    public function setUser_all($user_all)
+    {
+        $this->user_all = $user_all;
 
         return $this;
     }
