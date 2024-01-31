@@ -572,19 +572,14 @@ INSERT INTO
 VALUES
         
     ('john_doe', 'john@example.com', '1234', 1,'{"user":"USER_ROLE", "caisse":"CAISSE_ROLE"}'),
-    ('jane_doe', 'jane@example.com', '1234', 2,'{"user":"USER_ROLE"}', "sav":"SAV_ROLE"}'),
+    ('jane_doe', 'jane@example.com', '1234', 2,'{"user":"USER_ROLE", "sav":"SAV_ROLE"}'),
     ('bob_smith', 'bob@example.com', '1234', 3,'{"user":"USER_ROLE"}'),
     ('alice_johnson', 'alice@example.com', '1234', 4,'{"user":"USER_ROLE"}'),
     ('david_brown', 'david@example.com', '1234', 5,'{"user":"USER_ROLE"}'),
     ('emily_white', 'emily@example.com', '1234', 6,'{"user":"USER_ROLE"}'),
     ('michael_jones', 'michael@example.com', '1234', 7,'{"user":"USER_ROLE"}'),
     ('emma_miller', 'emma@example.com', '1234', 8,'{"user":"USER_ROLE"}'),
-    (
-        'christopher_taylor',
-        'christopher@example.com',
-        '1234',
-        9,'{"user":"USER_ROLE"}'
-    ),
+    ('christopher_taylor','christopher@example.com','1234',9,'{"user":"USER_ROLE"}'),
     ('olivia_wilson', 'olivia@example.com', '1234', 10,'{"user":"USER_ROLE"}');
 
 -- Créer des adresses pour chaque personne
@@ -880,7 +875,6 @@ VALUES
 
 -- Associez l'utilisateur 4 au rôle SAV_ROLE
 /* select all people */
-? a
 /* select pour les phone */
 CREATE VIEW
     V_mobile AS
@@ -967,7 +961,7 @@ FROM
     LEFT JOIN V_fixe f ON p.id = f.id_people
     LEFT JOIN V_mobile m ON p.id = m.id_people;
 
-CREATE VIEW
+/* CREATE VIEW
     V_user AS
 select
     u.id id,
@@ -976,9 +970,19 @@ select
     u.password password,
     r.roles roles
 from
-    user u,
-    roles r,
-    role_type rt
+    user u
 WHERE
     u.id = r.id_user
-    AND id_user = rt.id;
+    AND id_user = rt.id; */
+
+CREATE VIEW V_user AS
+SELECT
+    /* v.photo photo, */
+    u.*,
+    v.photo
+FROM 
+    V_people_all v,
+    user u
+WHERE
+    v.id=u.id_people;
+
