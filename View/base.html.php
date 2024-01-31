@@ -40,8 +40,7 @@
 <footer>
     
     <p>CopyRight by E-Success</p>
-    
-   quentin t'es un hhh  bizu
+
     
 </footer>
 
