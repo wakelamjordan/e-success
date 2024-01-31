@@ -1,4 +1,11 @@
 <?php
+
+    session_start();
+    if(!$_SESSION){
+        $_SESSION['login']='visiteur';
+        $_SESSION['roles']=json_encode(['ROLE_VISITEUR']);
+    }
+
     require_once("../Service/extra.php");
     spl_autoload_register('charger');
     // require '../View/base.html.php';

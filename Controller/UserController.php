@@ -19,25 +19,139 @@ class UserController extends MyFct{
                 $this->modifier($id);
                 break;
             case'insert':
+                $this->inserer();
+                break;
+            case'save':
+                $this->enregistrerVuser($_POST,$_FILES);
+                break;
+            case'login':
+                if($_POST){
+                    $this->valider($_POST);
+                }
+                $this->seConnecter();
+                break;
+            case'logout':
+                $this->seDeconnecter();
+                break;
+            case'delete':
+                $this->supprimerUser($id);
                 break;
                 
         }
     }
 ///-----------------------------------------------------------------
-    function inserer(){
-          $user=new User(); 
-          $user->setRoles(['ROLE_USER']);     
-          $disabled="";
-          $this->generateFormUser($user,$disabled);
+function supprimerUser($id){
+    $vm=new VuserManager();
+    $vm->deleteById($id);
+    header("location:user");
+    exit();
+}
+
+
+function seDeconnecter(){
+    session_destroy();
+    header('location:acceuil');
+    exit;
+}
+
+function valider($data){
+    $vm=new VuserManager();
+    extract($data);
+   
+    $dataCondition=[
+        'login'=>$login,
+        'password'=>$this->crypter($password),
+    ];
+
+    $user=$vm->findOneByCondition($dataCondition);
+    //$this->printr($user); die;
+
+    if($user->getLogin()){
+        $_SESSION['login']=$user->getLogin(); 
+        $_SESSION['roles']=$user->getRoles();
+
+     
+
+        header('location:acceuil');
+        exit;
     }
+    else{
+        $message="<div class='center'>";
+        $message.= "<p>email et ou mot de passe incorrect <p>";
+        $message.="</div>";
+
+        $variables=[
+            'message'=>$message,
+        ];
+        
+        $file="../View/erreur/erreur.html.php";
+        $this->generatePage($file,$variables);
+    }
+}
+
+
+public function seConnecter(){
+
+    $file="../View/user/formLogin.html.php";
+    $this->generatePage($file);
+}
+
+function enregistrerVuser($data,$files=[]){
+    // $this->printr($files);die;
+    if($files['photo']['name']){ 
+    
+        $file_photo=$files['photo'];  
+        $name=$file_photo['name'];  
+        $source=$file_photo['tmp_name']; 
+        $destination="upload/$name";  
+        move_uploaded_file($source,$destination); 
+    }else{
+        unset($data['name']); 
+     }
+     $vm=new VuserManager();
+     $connexion=$vm->connexion();
+     $data['roles']=json_encode($data['roles']);
+     $password=$data['password'];
+     if($password){  
+         $password=$this->crypter($password);
+         $data['password']=$password;
+     }else{ 
+         unset($data['password']); 
+     }
+    // $this->printr($data);die;
+     extract($data);
+     $id=(int) $id; 
+     if($id!=0){ 
+      
+  
+        
+         $vm->update($data,$id);
+     }else{ 
+        
+         $vm->insert($data);
+     }
+  
+     header("location:user");
+ }
+
+
+    function inserer(){
+          $user=new Vuser(); 
+          $user->setRoles(['USER_ROLE']);
+         // $user->setId(0);     
+          $disabled="";
+          $this->generateFrom($user,$disabled);
+    }
+
+
     function modifier($id){
 
-        $um = new UserManager();
+        $um = new VuserManager();
 
         $user=$um->findById($id);
 
         $user_roles=$user->getRoles();
-        $user_roles=json_decode($user_roles, true);//? pourquoi true?
+        $user_roles=json_decode($user_roles);
 
         $user->setRoles($user_roles);
 
@@ -48,12 +162,14 @@ class UserController extends MyFct{
 
     function afficher($id){
 
-        $um = new UserManager();
+        $um = new VuserManager();
 
         $user=$um->findById($id);
 
         $user_roles=$user->getRoles();
-        $user_roles=json_decode($user_roles, true);//? pourquoi true?
+        $user_roles=json_decode($user_roles);
+
+       // $this->printr($user_roles);
 
         $user->setRoles($user_roles);
 
@@ -90,7 +206,7 @@ class UserController extends MyFct{
                 $checked="";
             }
 
-            $role[]=['libelle'=>$libelle,'checked'=>$checked];
+            $roles[]=['libelle'=>$libelle,'checked'=>$checked];
         }
 
         $variables=[
@@ -111,7 +227,7 @@ class UserController extends MyFct{
 
     function liste(){
 
-        $um = new UserManager();
+        $um = new VuserManager();
 
         $users=$um->findAll();
        
@@ -128,3 +244,5 @@ class UserController extends MyFct{
         $this->generatePage($file, $variables);
     }
 }
+
+

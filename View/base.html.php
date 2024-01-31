@@ -25,11 +25,27 @@
         <ul class="">
             <li><a href="acceuil">ACCEUIL</a></li>
             <li><a href="#" class="">PRODUIT</a></li>
+
+            <?php if($_SESSION['login']!='visiteur'): ?>
+
             <li><a href="#">MON COMPTE</a></li>
+            <li><a href="user&action=logout">Se Deconnecter</a></li>
+
+            <?php else :?>
+
+            <li><a href="user&action=login">connexion</a></li>
+
+            <?php endif; ?>
+
+            <?php if(MyFct::isGranted('ADMIN_ROLE')): ?>
+
             <li><a href="">PARAMETRE</a>
             <ul><a href="user">USER</a></ul>
             <ul><a href="role">ROLE</a></ul>
             </li>
+
+            <?php endif; ?>  
+
         </ul>
     </nav>
 </main>
