@@ -2,11 +2,11 @@
 <div class="m-auto w80">
     <h1 class="titre text-light">LISTE ROLES</h1>
     <div class="div-btn my-2 print-none">
-        <a href="javascript:creerRole()"  class="btn btn-md btn-success"><i class="fas fa-cart-plus" ></i> Nouveau Role</a>
-        <a href="javascript:afficherRole()"  class="btn btn-md btn-primary"><i class="fas fa-shower" ></i>Afficher</a>
-        <a href="javascript:modifierRole()"  class="btn btn-md btn-primary"><i class="fa fa-pen"></i> Modifier</a>
-        <a href="javascript:supprimerRole()"  class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
-        <a href="javascript:window.print()"  class="btn btn-md btn-primary"><i class="fa fa-print" ></i> Imprimer</a>
+        <a href="javascript:creerRole()"> Nouveau Role</a>
+        <a href="javascript:afficherRole()">Afficher</a>
+        <a href="javascript:modifierRole()"> Modifier</a>
+        <a href="javascript:supprimerRole()"> Supprimer</a>
+        <a href="javascript:window.print()" > Imprimer</a>
     </div>
     <table class="w100 table-responsive">
         <thead id="thead_role">
@@ -56,7 +56,7 @@
         if(id==0){
             alert("Vous devez cocher une ligne à afficher");
         }else{
-            document.location.href="role_type&action=show&id="+id;
+            document.location.href="role&action=show&id="+id;
         }
 
     }
@@ -74,18 +74,30 @@
 
     }
 
-    function touche(event){
-        if(event.keyCode==13){
-            chercher();
-        }
-    }
-  function supprimer(){
-    const response=confirm("Voulez-vous bien supprimer ce role?");
-    if(response){
-        document.location.href="role&action=delete&id="+id;
-    }
-  }
-  function chercher(){
-    document.location.href="role&action=search&mot="+mot.value;
+    function getIdChecked(name_element){
+        let checkboxes=document.getElementsByName(name_element);
+        let id=0;
+        checkboxes.forEach((item)=>{
+            if(item.checked==true){
+                
+                id=item.value;
+                stop;
+                }
+    });
+
+    return id;
 }
+
+    function onlyOne(checkbox){ // checkbox est l'élément sur le quel on va cliqué
+        let checkboxes=document.getElementsByName(checkbox.name);
+        checkboxes.forEach(function(item){
+            if(item!=checkbox){// tester si item l'un des elements de checkboxes est different de checkbox selectionnée
+                item.checked=false;
+            }
+        });
+
+        checkbox.checked=true;
+    }
+
+
 </script>

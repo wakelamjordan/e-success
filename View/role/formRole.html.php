@@ -1,6 +1,6 @@
 <div>
     <h1>SAISIE ROLE</h1>
-    <form action="role_type&action=save" method='post' >
+    <form action="role&action=save" method='POST' >
 
         <div>
             <label for="id">ID</label>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="div-btn">
-            <a href="role_type">Retour à la liste</a>
+            <a href="role">Retour à la liste</a>
             <input type="reset" value="Annuler" <?=$disabled?>>
             <input type="submit" value="Valider" <?=$disabled?>>
         </div>
