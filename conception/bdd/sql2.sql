@@ -103,7 +103,7 @@ CREATE TABLE
         `place_birth` VARCHAR(255) NOT NULL,
         `id_nationality` INT (12) NOT NULL,
         `id_photo` INT (12) NOT NULL DEFAULT 1,
-        `id_collaborateur` INT (12) NOT NULL,
+        `id_collaborateur` INT (12),
         `id_civility` INT (12) NOT NULL,
         FOREIGN KEY (`id_nationality`) REFERENCES `e_success`.`nationality` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (`id_photo`) REFERENCES `e_success`.`photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -118,7 +118,7 @@ CREATE TABLE
         `login` VARCHAR(255) NOT NULL UNIQUE,
         `mail` VARCHAR(255) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
-        `roles` JSON NOT NULL,
+        `roles` JSON DEFAULT '["ROLE_USER"]',
         `new_mail` VARCHAR(255),
         `last_connexion` DATETIME DEFAULT NOW(),
         `code_new_mail` INT (12),
@@ -639,3 +639,8 @@ update user set login='test',mail='test',roles='["test"]' where id_people=2;
 
 select mail from user where id_people=2;
 select login, mail, password from user; */
+
+/* show TABLE status like 'photo';
+select Auto_increment from (show TABLE status like 'photo'); */
+
+SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'e_success' AND TABLE_NAME = 'photo';

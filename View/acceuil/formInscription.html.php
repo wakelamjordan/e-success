@@ -1,10 +1,13 @@
 <h1 class=""><?= $title ?></h1>
+<h2 class="" id="message"></h2>
 <p>Remplissez le formulaire ci-dessous.</p>
 <form id="formInscription" method="post" class="container-lg p">
     <!-- <div class=""> -->
-    <!-- <div class="p-2 border border-1 rounded m-1 " id='identitee'>
+    <div class="p-2 border border-1 rounded m-1 " id='identitee'>
         <fieldset>
             <legend>Identitée</legend>
+            <!-- name -->
+            <!-- surname -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="name" class="form-label">Nom :</label>
@@ -17,6 +20,8 @@
                     <small id="helpSurname" class="form-text text-muted d-none">champ prenom</small>
                 </div>
             </div>
+            <!-- date_birth -->
+            <!-- place_birth -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="date_birth" class="form-label">Date de naissance :</label>
@@ -29,6 +34,8 @@
                     <small id="helpPlace_birth" class="form-text text-muted d-none ">champ lieu de naissance</small>
                 </div>
             </div>
+            <!-- id_nationality -->
+            <!-- id_civility -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="id_nationality" class="form-label">Nationalité</label>
@@ -49,6 +56,7 @@
                     </select>
                 </div>
             </div>
+            <!-- path -->
             <div class="row">
                 <div class="mb-3 col d-flex">
                     <img src="./Public/upload/user_default.svg" alt="preview photo" class="m-auto img-fluid m_w_50" id='image_view'>
@@ -60,10 +68,11 @@
                 </div>
             </div>
         </fieldset>
-    </div> -->
+    </div>
     <div class="p-2 border border-1 rounded m-1 " id='compte'>
         <fieldset>
             <legend>Compte</legend>
+            <!-- mail -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="mail" class="form-label">Mail :</label>
@@ -77,10 +86,11 @@
                 <div class="mb-3 col-md-6">
                     <label for="ctrlMail" class="form-label">Vérification :</label>
                     <input type="text" class="form-control" name="ctrlMail" id="ctrlMail" aria-describedby="helpMail" placeholder="" required />
-                    
+
                     <small id="helpMail" class="form-text text-muted d-none">champ vérification mail</small>
                 </div>
             </div>
+            <!-- login -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="login" class="form-label">Identifiant :</label>
@@ -96,6 +106,7 @@
                     <small id="helpCtrlLogin" class="form-text text-muted d-none">champ vérification login</small>
                 </div>
             </div>
+            <!-- password -->
             <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="password" class="form-label">Mot de passe :</label>

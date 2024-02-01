@@ -1,7 +1,7 @@
 <?php
-
 class AcceuilController extends MyFct
 {
+    private $obj = 'Acceuil';
     function __construct()
     {
         $action = '';
@@ -19,8 +19,14 @@ class AcceuilController extends MyFct
     }
     function valider()
     {
-        $inscription=new Acceuil($_POST);
 
+
+        // foreach (array_keys($_POST) as $key) {
+        //     $get = 'get' . ucfirst($key);
+        //     if (method_exists($this->obj,$get)) {
+
+        //     }
+        // };
         $am = new AcceuilManager;
         $am->insertPeopleUser();
     }

@@ -1,18 +1,25 @@
-document.getElementById("formInscription").addEventListener("submit",(event)=>{
+document.getElementById("formInscription").addEventListener("submit", (event) => {
+    // event.preventDefault();
+    if (ctrlFieldInscription(event) !== false) {
+      var formData = new FormData(this);
 
-    event.preventDefault;
-    if(ctrlFieldInscription(event)!==false){
+      // alert(formData);
 
-        var formData= new FormData(this);
+      var xhr = new XMLHttpRequest();
 
-        // alert(formData);
+      xhr.onload = function () {
+        var response = JSON.parse(xhr.responseText);
+        let message = response.message;
+        document.getElementById("message").innerHTML = message;
+      };
+      xhr.open("POST", "acceuil&action=create");
 
-        var xhr=new XMLHttpRequest();
+      xhr.send(formData);
 
-        xhr.open("POST","acceuil&action=create");
+        event.preventDefault();
 
-        xhr.send(formData);
-
-
+      // (xhr.onload)=>{
+      //     var response=xhr.responseText;
+      // };
     }
-})
+  });
