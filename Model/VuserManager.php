@@ -8,16 +8,16 @@ public function findAllByCondition($dataCondition=[],$order='',$type='obj'){
 }
 
 public function findOneByCondition($dataCondition,$type="obj"){
-    return $this->findOneByConditionTable('v_user',$dataCondition,$type);
+    return $this->findOneByConditionTable('user',$dataCondition,$type);
 }
 public function search($columnLikes,$mot){
     return $this->searchTable('v_user',$columnLikes,$mot);
 }
 public function update($data,$id){
-    $this->updateTable('v_user',$data,$id);
+    $this->updateTable('user',$data,$id);
 }
 public function insert($data){
-    $this->insertTable('v_user',$data);
+    $this->insertTable('user',$data);
 }
 public function getDescribe(){
     $resultat=$this->getDescribeTable('v_user');
@@ -25,7 +25,7 @@ public function getDescribe(){
 }
 
 public function findAll(){
- return $this->listTable('v_user');
+ return $this->listTable('V_people_all');
 }
 
 public function deleteById($id){
@@ -33,7 +33,9 @@ public function deleteById($id){
 }
 
 public function findById($id,$type="obj"){
-    $resultat=$this->findByIdTable('v_user',$id);
+    $resultat=$this->findByIdTable('V_people_all',$id);
+    // print_r($resultat);
+    // die;
  if($type=="obj"){
     $objet=new Vuser($resultat);
     return $objet;

@@ -484,16 +484,16 @@ VALUES
 /* user */
 INSERT INTO `e_success`.`user` (`login`, `mail`, `password`, `roles`, `date_create`, `id_people`)
 VALUES
-    ('admin', 'john.doe@example.com', '1234', '["ROLE_USER","ADMIN_ROLE"]', NOW(), 1),
-    ('caisse', 'alice.smith@example.com', '1234', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
-    ('sav', 'bob.johnson@example.com', '1234', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
-    ('eva_martinez', 'eva.martinez@example.com', '1234', '["ROLE_USER"]', NOW(), 4),
-    ('ahmed_ali', 'ahmed.ali@example.com', '1234', '["ROLE_USER"]', NOW(), 5),
-    ('sophie_dubois', 'sophie.dubois@example.com', '1234', '["ROLE_USER"]', NOW(), 6),
-    ('michael_kim', 'michael.kim@example.com', '1234', '["ROLE_USER"]', NOW(), 7),
-    ('mia_chen', 'mia.chen@example.com', '1234', '["ROLE_USER"]', NOW(), 8),
-    ('antonio_ricci', 'antonio.ricci@example.com', '1234', '["ROLE_USER"]', NOW(), 9),
-    ('maria_silva', 'maria.silva@example.com', '1234', '["ROLE_USER"]', NOW(), 10);
+    ('admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ADMIN_ROLE"]', NOW(), 1),
+    ('caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
+    ('sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
+    ('eva_martinez', 'eva.martinez@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 4),
+    ('ahmed_ali', 'ahmed.ali@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 5),
+    ('sophie_dubois', 'sophie.dubois@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 6),
+    ('michael_kim', 'michael.kim@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 7),
+    ('mia_chen', 'mia.chen@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 8),
+    ('antonio_ricci', 'antonio.ricci@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 9),
+    ('maria_silva', 'maria.silva@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 10);
 
 /* address */
 INSERT INTO `e_success`.`address` (`no`, `address_line`, `street`, `city`, `postal_code`, `state`, `country`, `id_people`)
@@ -631,3 +631,11 @@ FROM
     V_just_people p
     LEFT JOIN V_fixe f ON p.id = f.id_people
     LEFT JOIN V_mobile m ON p.id = m.id_people;
+
+
+SET @id_photo:=( select id_photo from people where id=2);
+update photo set path='coco.jpg' where id=@id_photo;
+update user set login='test',mail='test',roles='["test"]' where id_people=2;
+
+select mail from user where id_people=2;
+select login, mail, password from user;

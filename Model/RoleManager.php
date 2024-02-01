@@ -3,7 +3,7 @@
 class RoleManager extends Manager{
 
     public function findAll(){
-        return $this->listTable('role_type');
+        return $this->listTable('role');
        }
        
        public function deleteById($id){

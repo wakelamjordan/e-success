@@ -103,8 +103,12 @@ function enregistrerVuser($data,$files=[]){
         $file_photo=$files['photo'];  
         $name=$file_photo['name'];  
         $source=$file_photo['tmp_name']; 
-        $destination="upload/$name";  
-        move_uploaded_file($source,$destination); 
+        $destination="./upload/$name";  
+        move_uploaded_file($source,$destination);
+        
+        //insersion du path dans variable data à aller insert dans la bdd
+
+        $data['path']=$name;
     }else{
         unset($data['name']); 
      }
@@ -169,9 +173,14 @@ function enregistrerVuser($data,$files=[]){
         $user_roles=$user->getRoles();
         $user_roles=json_decode($user_roles);
 
+        // print_r($user_roles);
+
        // $this->printr($user_roles);
 
         $user->setRoles($user_roles);
+
+        // print_r($user);
+        // die;
 
         $disabled='disabled';
 
@@ -182,7 +191,12 @@ function enregistrerVuser($data,$files=[]){
 
         $photo=$user->getPhoto();
 
+        
         $user_roles=$user->getRoles();
+        
+        // print_r($user_roles);
+        // die;
+
 
         if(!$photo){
             $photo="fakePhoto.jpg";
@@ -191,6 +205,10 @@ function enregistrerVuser($data,$files=[]){
         $rm = new RoleManager();
 
         $myRoles = $rm->findAll();
+
+        // print_r($myRoles);
+
+        // die;
 
         $roles=[];
 

@@ -1,5 +1,12 @@
 <?php
 
+// require_once '../Service/MyFct.php';
+
+// $crypter=new MyFct;
+// $crypter=$crypter->crypter('1234');
+// echo $crypter;
+// die;
+
     session_start();
     if(!$_SESSION){
         $_SESSION['login']='visiteur';

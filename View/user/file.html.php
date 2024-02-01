@@ -19,7 +19,7 @@
             <?php foreach($lignes as $ligne): ?>
                 <tr>
                     <td><?=$ligne['id']?></td>
-                    <td><img src="upload/<?=$ligne['photo']?>" width="50px"></td>
+                    <td><img src="./upload/<?=$ligne['photo']?>" width="50px"></td>
                     <td><?=$ligne['login']?></td>
                     <td><?=$ligne['mail']?></td>
                     <td >

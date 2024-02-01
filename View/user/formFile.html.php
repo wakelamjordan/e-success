@@ -9,7 +9,7 @@
     </div>
     <div >
         <label for="photo">PHOTO</label>
-        <img id="image_view" src="upload/<?=$photo?>" alt="" width="200px" >
+        <img id="image_view" src="./upload/<?=$photo?>" alt="" width="200px" >
         <input type="file" id="photo" name="photo"  onChange="previewImage(event,'image_view')">
         <a href="javascript:choisir()">Choisir une photo</a>
     </div>
