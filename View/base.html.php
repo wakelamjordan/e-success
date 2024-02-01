@@ -41,7 +41,7 @@
 
             <li><a href="">PARAMETRE</a>
             <ul><a href="user">USER</a></ul>
-            <ul><a href="role">ROLE</a></ul>
+            <ul><a href="role_type">ROLE</a></ul>
             </li>
 
             <?php endif; ?>  
