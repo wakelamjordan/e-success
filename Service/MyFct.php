@@ -15,8 +15,9 @@ class MyFct{
 
     function throwMessage($message){
         $variables=['message'=>$message];
-        $file="view/erreur/erreur.html.php";
+        $file="../View/erreur/erreur.html.php";
         $this->generatePage($file,$variables);
+        die;
     }
 
     function crypter($password,$iteration=127){// on a mis par default $iteration 127
