@@ -1,6 +1,6 @@
 <?php
 
-class User{
+class V_user{
 
     private $id;
     private $login;

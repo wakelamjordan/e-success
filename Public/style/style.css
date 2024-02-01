@@ -1,17 +1,38 @@
+
+*{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
+
+
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-header, footer {
-    background-color: black;
-    color: white;
+header{
+    background-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     padding: 10px;
     text-align: center;
+    
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    
 }
 
 main {
@@ -20,9 +41,24 @@ main {
     text-align: center;
 }
 
+.promo{
+    background-color: black;
+    color: white;
+    padding: 2px;
+    top: 0;
+    width: 100%;
+    text-align: center;
+}
+
 /*NAVIGATION*/
+
+
 nav {
-    text-align: left;
+text-align: left;
+   margin-top: 20px;
+   background-color: white;
+   font-size: 18px;
+  
 }
 
 nav ul {
@@ -33,7 +69,7 @@ nav ul {
 }
 
 nav li {
-    margin-right: 10px; /* Ajoute un espace entre les liens */
+    margin-right: 10px; 
 }
 
 nav a {
@@ -42,12 +78,17 @@ nav a {
     padding: 10px;
 }
 
-footer {
-    background-color: black;
-    color: white;
-    padding: 30px;
-    text-align: center;
+ul li {
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
 }
+
+ul li:hover {
+    background-color: #494242; 
+}
+
+
+
 
 /* INSCRIPTION */
 
@@ -107,4 +148,29 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+
+
+
+/*NAVBAR BOOSTRAP*/
+
+.navbar {
+    top: -25px;
+    padding-top: ;
+    border-bottom: 2px solid #d1a4a4; /* Bordure en bas de la barre de navigation */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 20px; 
+}
+
+
+.dropdown-menu {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+
+.dropdown-item:hover {
+    background-color: #55585a; /* Couleur de fond au survol des éléments du menu déroulant */
 }

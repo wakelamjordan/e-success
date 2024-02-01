@@ -31,7 +31,7 @@ CREATE TABLE
     IF NOT EXISTS `e_success`.`role_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `rang` INT (100) NOT NULL,
-        `role` JSON NOT NULL,
+        `libelle` varchar(200),
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
@@ -85,7 +85,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`photo` (
         `id` INT (12) NULL AUTO_INCREMENT PRIMARY KEY,
-        `path_photo` VARCHAR(255) NOT NULL,
+        `path_photo` VARCHAR(255),
         `id_news` INT (12) UNIQUE,
         `id_article` INT (12) UNIQUE,
         FOREIGN KEY (`id_news`) REFERENCES `e_success`.`news` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -114,7 +114,7 @@ CREATE TABLE
         `mail` VARCHAR(255) NOT NULL,
         `password` VARCHAR(255) NOT NULL,
         `id_people` INT NOT NULL UNIQUE,
-        `roles` JSON NOT NULL,
+        `roles` JSON,
         FOREIGN KEY (`id_people`) REFERENCES `e_success`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
@@ -418,21 +418,13 @@ VALUES
 
 /* ----------role */
 INSERT INTO
-    role_type (rang, role)
+    role_type (rang, libelle)
 VALUES
-    (0, '{
-        "user":"USER_ROLE"
-    }'),
-    (1, '{
-        "admin":"ADMIN_ROLE"
-    }'),
-    (2, '{
-        "caisse":"CAISSE_ROLE"
-    }
-    '),
-    (3, '{
-        "sav":"SAV_ROLE"
-    }');
+    (0, 'USER_ROLE'),
+    (1, 'ADMIN_ROLE'),
+    (2, 'CAISSE_ROLE'),
+    (3, 'SAV_ROLE');
+
 
 /* ----------role */
 INSERT INTO
@@ -568,19 +560,20 @@ VALUES
 
 -- Créer des comptes utilisateur avec le mot de passe "1234"
 INSERT INTO
-    `e_success`.`user` (`login`, `mail`, `password`, `id_people`,`roles`)
+    e_success.user (login, mail, password, id_people,roles)
 VALUES
         
-    ('john_doe', 'john@example.com', '1234', 1,'{"user":"USER_ROLE", "caisse":"CAISSE_ROLE"}'),
-    ('jane_doe', 'jane@example.com', '1234', 2,'{"user":"USER_ROLE", "sav":"SAV_ROLE"}'),
-    ('bob_smith', 'bob@example.com', '1234', 3,'{"user":"USER_ROLE"}'),
-    ('alice_johnson', 'alice@example.com', '1234', 4,'{"user":"USER_ROLE"}'),
-    ('david_brown', 'david@example.com', '1234', 5,'{"user":"USER_ROLE"}'),
-    ('emily_white', 'emily@example.com', '1234', 6,'{"user":"USER_ROLE"}'),
-    ('michael_jones', 'michael@example.com', '1234', 7,'{"user":"USER_ROLE"}'),
-    ('emma_miller', 'emma@example.com', '1234', 8,'{"user":"USER_ROLE"}'),
-    ('christopher_taylor','christopher@example.com','1234',9,'{"user":"USER_ROLE"}'),
-    ('olivia_wilson', 'olivia@example.com', '1234', 10,'{"user":"USER_ROLE"}');
+    ('john_doe', 'john@example.com', '1234', 1,'["USER_ROLE","CAISSE_ROLE"]'),
+    ('jane_doe', 'jane@example.com', '1234', 2,'["USER_ROLE","CAISSE_ROLE"]'),
+    ('bob_smith', 'bob@example.com', '1234', 3,'["USER_ROLE","SAV_ROLE"]'),
+    ('alice_johnson', 'alice@example.com', '1234', 4,'["USER_ROLE"]'),
+    ('david_brown', 'david@example.com', '1234', 5,'["USER_ROLE"]'),
+    ('emily_white', 'emily@example.com', '1234', 6,'["USER_ROLE","ADMIN_ROLE"]'),
+    ('michael_jones', 'michael@example.com', '1234', 7,'["USER_ROLE"]'),
+    ('emma_miller', 'emma@example.com', '1234', 8,'["USER_ROLE"]'),
+    ('christopher_taylor','christopher@example.com','1234',9,'["USER_ROLE"]'),
+    ('olivia_wilson', 'olivia@example.com', '1234', 10,'["USER_ROLE"]');
+
 
 -- Créer des adresses pour chaque personne
 INSERT INTO
