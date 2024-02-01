@@ -10,15 +10,18 @@ class UserController extends MyFct{
         switch ($action) {
             // à défaut quelque soit ce qui sera rentré comme action la méthode liste sera appliqué
            case'liste':
+            //if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
             $this->liste();
             break;
             case'show':
+                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
                 $this->afficher($id);
                 break;
             case'modify':
+                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
                 $this->modifier($id);
                 break;
-            case'insert':
+            case'insert': 
                 $this->inserer();
                 break;
             case'save':
@@ -34,6 +37,7 @@ class UserController extends MyFct{
                 $this->seDeconnecter();
                 break;
             case'delete':
+                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
                 $this->supprimerUser($id);
                 break;
                 
@@ -103,7 +107,7 @@ function enregistrerVuser($data,$files=[]){
         $file_photo=$files['photo'];  
         $name=$file_photo['name'];  
         $source=$file_photo['tmp_name']; 
-        $destination="./upload/$name";  
+        $destination="upload/$name";  
         move_uploaded_file($source,$destination);
         
         //insersion du path dans variable data à aller insert dans la bdd

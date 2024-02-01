@@ -633,9 +633,9 @@ FROM
     LEFT JOIN V_mobile m ON p.id = m.id_people;
 
 
-SET @id_photo:=( select id_photo from people where id=2);
+/* SET @id_photo:=( select id_photo from people where id=2);
 update photo set path='coco.jpg' where id=@id_photo;
 update user set login='test',mail='test',roles='["test"]' where id_people=2;
 
 select mail from user where id_people=2;
-select login, mail, password from user;
+select login, mail, password from user; */
