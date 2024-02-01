@@ -56,7 +56,7 @@
         if(id==0){
             alert("Vous devez cocher une ligne à afficher");
         }else{
-            document.location.href="role_type&action=show&id="+id;
+            document.location.href="role&action=show&id="+id;
         }
 
     }
@@ -74,18 +74,30 @@
 
     }
 
-    function touche(event){
-        if(event.keyCode==13){
-            chercher();
-        }
-    }
-  function supprimer(){
-    const response=confirm("Voulez-vous bien supprimer ce role?");
-    if(response){
-        document.location.href="role&action=delete&id="+id;
-    }
-  }
-  function chercher(){
-    document.location.href="role&action=search&mot="+mot.value;
+    function getIdChecked(name_element){
+        let checkboxes=document.getElementsByName(name_element);
+        let id=0;
+        checkboxes.forEach((item)=>{
+            if(item.checked==true){
+                
+                id=item.value;
+                stop;
+                }
+    });
+
+    return id;
 }
+
+    function onlyOne(checkbox){ // checkbox est l'élément sur le quel on va cliqué
+        let checkboxes=document.getElementsByName(checkbox.name);
+        checkboxes.forEach(function(item){
+            if(item!=checkbox){// tester si item l'un des elements de checkboxes est different de checkbox selectionnée
+                item.checked=false;
+            }
+        });
+
+        checkbox.checked=true;
+    }
+
+
 </script>
