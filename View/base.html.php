@@ -30,27 +30,27 @@
                 
  
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-togglea" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     MON COMPTE
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="user">se deconnecter</a>
+                <div class="dropdown-menuaa" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-itema" href="user&action=logout">se deconnecter</a>
                     <?php else :?>
 
 
                    
-                    <li class="nav-item"><a class="nav-link" href="#">CONNEXION</a></li>
+                    <li class="nav-item"><a class="nav-link" href="user&action=login">CONNEXION</a></li>
                     <?php endif; ?>
-                    <?php if(MyFct::isGranted('ADMIN_ROLE')): ?>
+                    <?php if(MyFct::isGranted('ROLE_ADMIN')): ?>
 
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-togglea" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     PARAMETRE
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menua" aria-labelledby="navbarDropdowna">
                     <a class="dropdown-item" href="user">USER</a>
                     <a class="dropdown-item" href="role">ROLE</a>
                 </div>
