@@ -13,7 +13,7 @@ class MyFct{
         }
     }
 
-    function trowMessage($message){
+    function throwMessage($message){
         $variables=['message'=>$message];
         $file="view/erreur/erreur.html.php";
         $this->generatePage($file,$variables);

@@ -1,11 +1,16 @@
 <?php
 class RoleController extends MyFct{
+class RoleController extends MyFct{
     function __construct()
     {
       
         $action = 'list';
      
+      
+        $action = 'list';
+     
         extract($_GET);
+       
        
         switch ($action) {
             case'list':
