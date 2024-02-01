@@ -1,27 +1,27 @@
 <?php
 class Acceuil{
-    private $name;
+    private $mail;
     function __construct($data)
     {
-        echo 'objet';
+        foreach($data as )
     }
 
     /**
-     * Get the value of name
+     * Get the value of mail
      */ 
-    public function getName()
+    public function getMail()
     {
-        return $this->name;
+        return $this->mail;
     }
 
     /**
-     * Set the value of name
+     * Set the value of mail
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setMail($mail)
     {
-        $this->name = $name;
+        $this->mail = $mail;
 
         return $this;
     }

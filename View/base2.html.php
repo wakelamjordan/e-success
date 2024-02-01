@@ -16,9 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
-    <script src="./Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="./Public/js/myScript.js" defer></script>
-    <script src="./Public/js/ajax.js" defer></script>
+    <script src="../Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../Public/js/myScript.js" defer></script>
 
 
 </head>
@@ -26,10 +25,6 @@
 <body>
     <!--LIEN UTILE-->
     <header>
-        <!--NAVBAR-->
-        <div class="promo">
-            <p>Livraison GRATUITE dans toute L'EUROPE🌎</p>
-        </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="acceuil">ACCEUIL</a></li>
@@ -76,12 +71,9 @@
 
     </header>
 
-    <!--BODY-->
-
-    <main>
-        <div class="mx-auto ">
+    <!--MAIN-->
+    <main class="container-fluid">
             <?= $content ?>
-        </div>
     </main>
 
     <!--FOOTER-->

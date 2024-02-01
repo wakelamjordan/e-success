@@ -19,15 +19,22 @@ class AcceuilController extends MyFct
     }
     function valider()
     {
+        $inscription=new Acceuil($_POST);
+
         $am = new AcceuilManager;
         $am->insertPeopleUser();
     }
     function inscription()
     {
+        $am = new AcceuilManager;
+        $nationality = $am->selectNationality();
+        $civility = $am->selectCivility();
         // $page = new MyFct;
         $file = '../View/acceuil/formInscription.html.php';
         $variables = [
-            'title' => 'inscription'
+            'title' => 'inscription',
+            'nationality' => $nationality,
+            'civility' => $civility
         ];
         $this->generatePage($file, $variables);
     }

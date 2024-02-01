@@ -1,3 +1,49 @@
+
+//jordan fonction pour controller la concordance des input d'un formulaire avec vérification saisie
+function ctrlFieldInscription(event) {
+
+    // alert('eeeee');
+    // mail
+    var array = [];
+    // mail
+    var mail = document.getElementById('mail').value;
+    var ctrlMail = document.getElementById('ctrlMail').value;
+
+    array['mail'] = mail;
+    array['ctrlMail'] = ctrlMail;
+
+    // login
+    var login = document.getElementById('login').value;
+    var ctrlLogin = document.getElementById('ctrlLogin').value;
+
+    array['login'] = login;
+    array['ctrlLogin'] = ctrlLogin;
+
+    // password
+    var password = document.getElementById('password').value;
+    var ctrlPassword = document.getElementById('ctrlPassword').value;
+
+    array['password'] = password;
+    array['ctrlPassword'] = ctrlPassword;
+
+    // récupération des keys
+    var keys = Object.keys(array);
+
+    for (let i = 0; i < keys.length; i += 2) {
+        var key1 = keys[i];
+        var key2 = keys[i+1];
+
+        var valeur1 = array[key1];
+        var valeur2 = array[key2];
+
+        if (valeur1 !== valeur2) {
+            document.getElementById(key1 + "Error").innerHTML = `Les champs ${key1} ne correspondent pas!`;
+            event.preventDefault();
+            return false;
+        }
+    }
+}
+
 function previewImage(event,id_image){
     const image=event.target.files[0];
     if(image){
