@@ -2,11 +2,11 @@
 <div class="m-auto w80">
     <h1 class="titre text-light">LISTE ROLES</h1>
     <div class="div-btn my-2 print-none">
-        <a href="javascript:creerRole()"  class="btn btn-md btn-success"><i class="fas fa-cart-plus" ></i> Nouveau Role</a>
-        <a href="javascript:afficherRole()"  class="btn btn-md btn-primary"><i class="fas fa-shower" ></i>Afficher</a>
-        <a href="javascript:modifierRole()"  class="btn btn-md btn-primary"><i class="fa fa-pen"></i> Modifier</a>
-        <a href="javascript:supprimerRole()"  class="btn btn-md btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
-        <a href="javascript:window.print()"  class="btn btn-md btn-primary"><i class="fa fa-print" ></i> Imprimer</a>
+        <a href="javascript:creerRole()"> Nouveau Role</a>
+        <a href="javascript:afficherRole()">Afficher</a>
+        <a href="javascript:modifierRole()"> Modifier</a>
+        <a href="javascript:supprimerRole()"> Supprimer</a>
+        <a href="javascript:window.print()" > Imprimer</a>
     </div>
     <table class="w100 table-responsive">
         <thead id="thead_role">

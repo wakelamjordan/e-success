@@ -141,7 +141,7 @@ class Manager
         return $resultat;
     }
 
-    function updateTable($table, $data, $id)
+   /* function updateTable($table, $data, $id)
     {
         $connexion = $this->connexion();
         $setColumn = "";
@@ -157,7 +157,7 @@ class Manager
                         $setColumn.=",$key=?";
                     }
                 */
-                $values[] = $value;
+          /*      $values[] = $value;
             }
         }
 
@@ -183,6 +183,25 @@ class Manager
         // die;
         //------
         $requete = $connexion->prepare($sql);
+        $requete->execute($values);
+    }*/
+
+    function updateTable($table,$data,$id){
+        $connexion=$this->connexion();
+        $setColumn="";
+        $values=[];
+        foreach($data as $key=>$value){
+            if($key!='id'){
+                $setColumn.= ($setColumn=="") ?  "$key=?"  :  ",$key=?";  // if ternaire 
+              
+                $values[]=$value;
+            }
+     
+        }
+        $sql="update $table set $setColumn where id=?";
+        $values[]=$id;
+      
+        $requete=$connexion->prepare($sql);
         $requete->execute($values);
     }
 

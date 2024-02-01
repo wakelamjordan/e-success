@@ -37,7 +37,7 @@
 
             <?php endif; ?>
 
-            <?php if(MyFct::isGranted('ADMIN_ROLE')): ?>
+            <?php if(MyFct::isGranted('ROLE_ADMIN')): ?>
 
             <li><a href="">PARAMETRE</a>
             <ul><a href="user">USER</a></ul>
