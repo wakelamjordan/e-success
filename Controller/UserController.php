@@ -103,7 +103,7 @@ function enregistrerVuser($data,$files=[]){
         $file_photo=$files['photo'];  
         $name=$file_photo['name'];  
         $source=$file_photo['tmp_name']; 
-        $destination="./upload/$name";  
+        $destination="upload/$name";  
         move_uploaded_file($source,$destination);
         
         //insersion du path dans variable data à aller insert dans la bdd
