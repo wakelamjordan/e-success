@@ -57,7 +57,7 @@
             </li>
 
             <?php endif; ?>
-            <li class="nav-item"><a class="nav-link" href="#">INSCRIPTION</a></li>
+            <li class="nav-item"><a class="nav-link" href="acceuil&action=create">INSCRIPTION</a></li>
         </ul>
         <div class="right">
             <h1 class="text-dark"> E-SUCESS </h1>
