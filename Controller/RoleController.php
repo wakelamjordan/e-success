@@ -1,6 +1,5 @@
 <?php
 class RoleController extends MyFct{
-class RoleController extends MyFct{
     function __construct()
     {
       
