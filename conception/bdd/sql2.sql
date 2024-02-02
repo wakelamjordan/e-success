@@ -47,12 +47,12 @@ CREATE TABLE
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
-CREATE TABLE
+/* CREATE TABLE
     IF NOT EXISTS `e_success`.`phone_type` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `libelle` VARCHAR(255) NOT NULL UNIQUE,
         PRIMARY KEY (`id`)
-    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci; */
 
 CREATE TABLE
     IF NOT EXISTS `e_success`.`news` (
@@ -115,7 +115,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`user` (
         `id` INT (12) NULL AUTO_INCREMENT,
-        `login` VARCHAR(255) NOT NULL UNIQUE,
+        `phone` VARCHAR(255) NOT NULL UNIQUE,
         `mail` VARCHAR(255) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
         `roles` JSON DEFAULT '["ROLE_USER"]',
@@ -173,16 +173,16 @@ CREATE TABLE
         PRIMARY KEY (`id`)
     ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
 
-CREATE TABLE
+/* CREATE TABLE
     IF NOT EXISTS `e_success`.`phone` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `phone_number` VARCHAR(255) NOT NULL UNIQUE,
         `id_people` INT (12) NOT NULL,
         FOREIGN KEY (`id_people`) REFERENCES `e_success`.`people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         PRIMARY KEY (`id`)
-    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci; */
 
-CREATE TABLE
+/* CREATE TABLE
     IF NOT EXISTS `e_success`.`phone_type_phone` (
         `id` INT (12) NULL AUTO_INCREMENT,
         `id_phone` INT (12) NOT NULL,
@@ -190,7 +190,7 @@ CREATE TABLE
         FOREIGN KEY (`id_phone`) REFERENCES `e_success`.`phone` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (`id_phone_type`) REFERENCES `e_success`.`phone_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         PRIMARY KEY (`id`)
-    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci;
+    ) ENGINE = InnoDB CHARSET = utf8 COLLATE utf8_persian_ci; */
 
 ------------------------------------------------------------------------------------------------------------
 /* civility */
@@ -397,9 +397,9 @@ INSERT INTO `e_success`.`state_type` (`libelle`) VALUES
     ('Confirmation client');
 
 /* number_type */
-INSERT INTO `e_success`.`phone_type` (`libelle`) VALUES
+/* INSERT INTO `e_success`.`phone_type` (`libelle`) VALUES
     ('Fixe'),
-    ('Mobile');
+    ('Mobile'); */
 
 /* news */
 
@@ -471,29 +471,41 @@ INSERT INTO `e_success`.`photo` (`path`) VALUES
 INSERT INTO `e_success`.`people` (`name`, `surname`, `date_birth`, `place_birth`, `id_nationality`, `id_photo`, `id_collaborateur`, `id_civility`)
 VALUES
     ('John', 'Doe', '1990-05-15', 'Paris', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'French'), 2, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'CDI'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
+
     ('Alice', 'Smith', '1988-09-22', 'New York', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'American Samoa'), 3, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'CDD'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
+
     ('Bob', 'Johnson', '1995-03-10', 'London', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'British'), 4, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Freelance'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
-    ('Eva', 'Martinez', '1985-07-03', 'Madrid', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Spanish'), 5, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Interim'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
-    ('Ahmed', 'Ali', '1992-12-18', 'Cairo', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Egyptian'), 6, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Stagiaire'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
-    ('Sophie', 'Dubois', '1987-04-25', 'Paris', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'French'), 7, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'CDI'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
-    ('Michael', 'Kim', '1993-08-11', 'Seoul', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'South Korean'), 8, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'CDD'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
-    ('Mia', 'Chen', '1986-01-07', 'Shanghai', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Chinese'), 9, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Freelance'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
-    ('Antonio', 'Ricci', '1996-06-14', 'Rome', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Italian'), 10, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Interim'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
-    ('Maria', 'Silva', '1984-02-28', 'Lisbon', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Portuguese'), 11, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = 'Stagiaire'), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame'));
+
+    ('Eva', 'Martinez', '1985-07-03', 'Madrid', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Spanish'), 5, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
+
+    ('Ahmed', 'Ali', '1992-12-18', 'Cairo', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Egyptian'), 6, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
+
+    ('Sophie', 'Dubois', '1987-04-25', 'Paris', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'French'), 7, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
+
+    ('Michael', 'Kim', '1993-08-11', 'Seoul', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'South Korean'), 8, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
+
+    ('Mia', 'Chen', '1986-01-07', 'Shanghai', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Chinese'), 9, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame')),
+
+    ('Antonio', 'Ricci', '1996-06-14', 'Rome', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Italian'), 10, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Monsieur')),
+
+    ('Maria', 'Silva', '1984-02-28', 'Lisbon', (SELECT `id` FROM `e_success`.`nationality` WHERE `libelle` = 'Portuguese'), 11, (SELECT `id` FROM `e_success`.`collaborateur` WHERE `libelle` = ''), (SELECT `id` FROM `e_success`.`civility` WHERE `libelle` = 'Madame'));
 
 /* user */
-INSERT INTO `e_success`.`user` (`login`, `mail`, `password`, `roles`, `date_create`, `id_people`)
+INSERT INTO `e_success`.`user` (`phone`, `mail`, `password`, `roles`, `date_create`, `id_people`)
 VALUES
-    ('admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_ADMIN"]', NOW(), 1),
-    ('caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
-    ('sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
-    ('eva_martinez', 'eva.martinez@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 4),
-    ('ahmed_ali', 'ahmed.ali@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 5),
-    ('sophie_dubois', 'sophie.dubois@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 6),
-    ('michael_kim', 'michael.kim@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 7),
-    ('mia_chen', 'mia.chen@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 8),
-    ('antonio_ricci', 'antonio.ricci@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 9),
-    ('maria_silva', 'maria.silva@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 10);
+    ('00admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_ADMIN"]', NOW(), 1),
+    ('00caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
+    ('00sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
+    ('01', 'eva.martinez@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 4),
+    ('02', 'ahmed.ali@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 5),
+    ('03', 'sophie.dubois@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 6),
+    ('04', 'michael.kim@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 7),
+    ('05', 'mia.chen@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 8),
+    ('06', 'antonio.ricci@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 9),
+    ('07', 'maria.silva@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 10);
+
+SELECT name, roles FROM people p, user u WHERE u.id_people = p.id AND u.mail = ? AND u.password = ?;
+SELECT name, roles FROM people p, user u WHERE u.id_people = p.id;
 
 /* address */
 INSERT INTO `e_success`.`address` (`no`, `address_line`, `street`, `city`, `postal_code`, `state`, `country`, `id_people`)
@@ -511,7 +523,7 @@ VALUES
 
 /* number */
 
-INSERT INTO `e_success`.`phone` (`phone_number`, `id_people`)
+/* INSERT INTO `e_success`.`phone` (`phone_number`, `id_people`)
 VALUES
     ('100123456789', 1),   -- Numéro Fixe pour John Doe
     ('100987654321', 1),   -- Numéro Mobile pour John Doe
@@ -532,11 +544,11 @@ VALUES
     ('900888999000', 9),   -- Numéro Fixe pour Antonio Ricci
     ('900333444555', 9),   -- Numéro Mobile pour Antonio Ricci
     ('1000999888777', 10),  -- Numéro Fixe pour Maria Silva
-    ('1000444555666', 10);  -- Numéro Mobile pour Maria Silva
+    ('1000444555666', 10);  -- Numéro Mobile pour Maria Silva */
 
 /* type_phone */
 
-INSERT INTO `e_success`.`phone_type_phone` (`id_phone`, `id_phone_type`)
+/* INSERT INTO `e_success`.`phone_type_phone` (`id_phone`, `id_phone_type`)
 VALUES
     (1, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Fixe')),   -- Type Fixe pour le numéro 1
     (2, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Mobile')), -- Type Mobile pour le numéro 2
@@ -557,10 +569,10 @@ VALUES
     (17, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Fixe')),   -- Type Fixe pour le numéro 7
     (18, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Mobile')), -- Type Mobile pour le numéro 8
     (19, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Fixe')),   -- Type Fixe pour le numéro 9
-    (20, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Mobile'));-- Type Mobile pour le numéro 10
+    (20, (SELECT `id` FROM `e_success`.`phone_type` WHERE `libelle` = 'Mobile'));-- Type Mobile pour le numéro 10 */
 
 /* view */
-use e_success;
+/* use e_success;
 CREATE VIEW
     V_fixe AS
 SELECT
@@ -630,7 +642,7 @@ SELECT
 FROM
     V_just_people p
     LEFT JOIN V_fixe f ON p.id = f.id_people
-    LEFT JOIN V_mobile m ON p.id = m.id_people;
+    LEFT JOIN V_mobile m ON p.id = m.id_people; */
 
 
 /* SET @id_photo:=( select id_photo from people where id=2);

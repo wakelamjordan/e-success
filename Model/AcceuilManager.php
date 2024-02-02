@@ -83,24 +83,7 @@ class AcceuilManager
         return $response;
     }
 
-    function request($sql, $variables = [])
-    {
-        $connexion = $this->connexion();
 
-        $request = $connexion->prepare($sql);
-
-        $request->execute($variables);
-
-        $count = $request->rowCount();
-
-        if ($count > 1) {
-            $result = $request->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            $result = $request->fetch(PDO::FETCH_ASSOC);
-        }
-
-        return $result;
-    }
     function selectNationality()
     {
         return $this->selectAll('nationality');
@@ -125,27 +108,5 @@ class AcceuilManager
     }
 
 
-    function connexion()
-    {
-        //constantes de connection
-        require_once '../Config/parametre.php';
-        $host = HOST;
-        $dbname = DBNAME;
 
-        $user = USER;
-        $password = PASSWORD;
-        // formation dsn 
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
-
-        // try pour test de la connexion
-
-        try {
-            //création de l'objet pour la connexion
-            $pdo = new PDO($dsn, $user, $password);
-            return $pdo;
-        } catch (PDOException $e) {
-            echo 'pas bon ' . $e->getMessage();
-            die;
-        }
-    }
 }

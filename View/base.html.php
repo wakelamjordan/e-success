@@ -47,7 +47,7 @@
 
 
 
-                    <li class="nav-item"><a class="nav-link" href="user&action=login">CONNEXION</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ap&action=signin">CONNEXION</a></li>
                 <?php endif; ?>
                 <?php if (MyFct::isGranted('ROLE_ADMIN')) : ?>
 
