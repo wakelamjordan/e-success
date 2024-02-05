@@ -41,7 +41,11 @@ class UserController extends MyFct
                     $this->identifiant();
                 } else {
                     // si post contien quelque chose
-                    $this->searchIdentifiant();
+                    if($this->identifiantExist()==true){
+                        $this->userConnexion();
+                    }else{
+                        $this->inscription();
+                    }
                 }
                 // $this->seConnecter();
                 break;
@@ -54,6 +58,12 @@ class UserController extends MyFct
                 break;
         }
     }
+    public function userConnexion(){
+
+    }
+    public function inscription(){
+        
+    }
     public function identifiant()
     {
         $file = '../View/ap/formUsername.html.php';
@@ -62,7 +72,7 @@ class UserController extends MyFct
         ];
         $this->generatePage($file, $variables);
     }
-    public function searchIdentifiant()
+    public function identifiantExist()
     {
         // controle de l'identifiant retourné dans la bdd.user.mail/phone
         extract($_POST);
@@ -77,19 +87,10 @@ class UserController extends MyFct
             $mail
         ];
 
-        $obj = $this->request($sql, $variables, 'Ap');
+        $exist = $this->request($sql, $variables, 'Ap');
 
-        // $first = $obj[0];
+        return $exist;
 
-        // $phone = $first->getPhone();
-
-        // $user;
-
-        // echo $phone;
-
-        var_dump($obj->getPhone());
-
-        exit;
     }
     // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
     function request($sql, $variables = [], $obj = '')
