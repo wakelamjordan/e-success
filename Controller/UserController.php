@@ -35,6 +35,8 @@ class UserController extends MyFct
                 $this->enregistrerVuser($_POST, $_FILES);
                 break;
             case 'login':
+
+                // die;
                 if ($_POST) {
                     $this->valider($_POST);
                 }

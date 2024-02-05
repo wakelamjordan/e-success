@@ -89,10 +89,10 @@
                 <!-- <button class="btn btn-outline-success" type="submit" href="user&action=login">Connexion</button> -->
               </form>
             <?php endif; ?>
-  
-        
-     
-  
+            <li class="nav-item"><a class="nav-link" href="acceuil&action=create">INSCRIPTION</a></li>
+        </ul>
+        <div class="right">
+            <h1 class="text-dark"> E-SUCESS </h1>
         </div>
       </div>
     </nav>
