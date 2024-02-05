@@ -656,3 +656,5 @@ select login, mail, password from user; */
 select Auto_increment from (show TABLE status like 'photo'); */
 
 /* SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'e_success' AND TABLE_NAME = 'photo'; */
+
+SELECT * FROM user WHERE mail= 'admin' AND password = '1234' OR phone = '0' AND password = '4321';

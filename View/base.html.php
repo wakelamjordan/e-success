@@ -63,6 +63,9 @@
                                     <li><a class="dropdown-item" href="role">Role</a></li>
                                 </ul>
                             </li>
+                            <!-- <li class="nav-item">
+                                <a href="user&action=login" class="btn btn-outline-success">Se connecter ou s'inscrire</a>
+                            </li> -->
                             <!-- mon compte avec deconnexion quand on est connecté -->
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle bi bi-person-badge" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,17 +77,31 @@
                             </li> -->
                         </ul>
                         <!-- groupe connexion compte création compte -->
-                        <ul class="nav justify-content-end flex-md-row">
+                        <ul class="nav justify-content-lg-end flex-md-row">
                             <!-- si connecté afficher -->
-                            <li class="nav-item">
-                                <!-- <a class="nav-link" href="user&action=logout">Se deconnecter</a> -->
+                            <li class="nav-item w-100">
+                                <?php if (MyFct::isGranted('ROLE_USER')) : ?>
+                                    <!-- <a class="nav-link" href="user&action=logout">Se deconnecter</a> -->
                             </li>
                             <!--  -->
-                            <li class="nav-itema">
+                            <li class="nav-item w-100 ">
                                 <!-- si connecté afficher -->
                                 <!-- <a href="user&action=login" class="nav-link">Mon Compte</a> -->
-                                <!--  -->
-                                <a href="user&action=login" class="btn btn-outline-success">Se connecter ou s'inscrire</a>
+                                <div class="dropdown open">
+                                    <a href="" class="btn btn-secondary dropdown-toggle w-100 " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?= $_SESSION['surname'] ?>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-lg-end w-100" aria-labelledby="triggerId">
+                                        <a class="dropdown-item" href="user&action=logout">Se deconnecter</a>
+                                    </div>
+                                </div>
+
+                            <?php endif; ?>
+                            <?php if ($_SESSION['login'] == 'visiteur') : ?>
+                                <!-- <a href="user&action=login" class="btn btn-outline-success">Se connecter ou s'inscrire</a> -->
+
+                                <a href="user&action=login" class="btn btn-outline-success w-100 ">Se connecter ou s'inscrire</a>
+                            <?php endif; ?>
                             </li>
                         </ul>
                     </div>

@@ -1,28 +1,28 @@
 <?php
 class Ap
 {
-    private $attributes=[];
+    // private $attributes=[];
     private $mail;
-    protected $phone;
-    protected $name;
-    protected $roles;
+    private $phone;
+    private $name;
+    private $roles;
 
-    // public function __construct($data)
-    // {
-    //     if (is_array($data)) {
-    //         foreach ($data as $key => $value) {
-    //             $set = "set" . ucfirst($key);
+    public function __construct($data)
+    {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $set = "set" . ucfirst($key);
 
-    //             if (method_exists($this, $set)) {
-    //                 $this->$set($value);
-    //             }
-    //         }
-    //     }
-    // }
-
-    public function __set($name,$value){
-        $this->attributes[$name]=$value;
+                if (method_exists($this, $set)) {
+                    $this->$set($value);
+                }
+            }
+        }
     }
+
+    // public function __set($name,$value){
+    //     $this->attributes[$name]=$value;
+    // }
 
     /**
      * Get the value of mail

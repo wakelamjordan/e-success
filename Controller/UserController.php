@@ -60,16 +60,37 @@ class UserController extends MyFct
     // public function userConnexion(){
     // }
     // public function inscription(){
-        
+
     // }
-    public function validation(){
-        if(key_exists('date_birth',$_POST)){
-            $obj=new Ap;
-            $test=$obj->getMail();
-            var_dump($test);
-            exit;
-        }else{
-            echo "connexion";
+    public function validation()
+    {
+        if (key_exists('date_birth', $_POST)) {
+            // $obj = new Ap;
+            // $test = $obj->getMail();
+            // var_dump($test);
+            // exit;
+        } else {
+            extract($_POST);
+            
+            $sql="
+            SELECT roles, mail ,surname, last_connexion FROM user u JOIN people p ON u.id_people = p.id  WHERE mail=? AND password = ? OR phone = ? AND password = ?;UPDATE user SET last_connexion=NOW()";
+
+            $variables=[
+                $mail,
+                $this->crypter($password),
+                $mail,
+                $this->crypter($password),
+            ];
+
+            $sql=$this->request($sql,$variables);
+
+            $_SESSION=[
+                'login'=>$sql['mail'],
+                'surname'=>$sql['surname'],
+                'roles'=>$sql['roles'],
+            ];
+
+            header("location:acceuil");
         }
     }
     //affichage du formulaire pour demander d'entrer un identifiant ou numéros de téléphone
@@ -94,32 +115,32 @@ class UserController extends MyFct
             $mail
         ];
 
-        $exist = $this->request($sql, $variables, 'Ap');
+        $exist = $this->request($sql, $variables);
 
-        if($exist==true){
+        if ($exist == true) {
 
             //si existant on charge le formulaire de connexion qui demandera le mot de pass et mettra la valeur de input mail/phone précédement saisi dans l'identifiant
-            $file="../View/ap/formLogin.html.php";
+            $file = "../View/ap/formLogin.html.php";
 
-            $variables=[
-                'title'=>'Connexion',
-                'mail'=>$mail
+            $variables = [
+                'title' => 'Connexion',
+                'mail' => $mail
             ];
 
-            $this->generatePage($file,$variables);
-        }else{
+            $this->generatePage($file, $variables);
+        } else {
             // si non existant déjà dans la base de donner on charge le formulaire d'inscription
-            $file ="../View/ap/formInscription.html.php";
+            $file = "../View/ap/formInscription.html.php";
 
-            $variables=[
-                'title'=>'Inscription',  
+            $variables = [
+                'title' => 'Inscription',
             ];
 
-            $this->generatePage($file,$variables);
+            $this->generatePage($file, $variables);
         }
     }
     // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
-    function request($sql, $variables = [], $obj = '')
+    function request($sql, $variables = [])
     {
         $connexion = $this->connexion();
 
@@ -129,20 +150,16 @@ class UserController extends MyFct
 
         $count = $request->rowCount();
 
-        if ($count > 0) {
-            if ($count > 1) {
-                $result=$request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                // $result = $request->fetchAll();
-            } else {
-                $result = $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                // $result=$request->fetch();
-            }
-            return $result;
+        if ($count > 1) {
+            $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+            // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+            $result = $request->fetchAll();
         } else {
-            return null;
+            $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+            // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+            $result=$request->fetch();
         }
+        return $result;
     }
     //connexion utilisé par request
     private function connexion()

@@ -15,12 +15,6 @@ class AcceuilController extends MyFct
                 // echo "produit";
                 $this->produit();
                 break;
-            case 'create':
-                if ($_POST) {
-                    $this->valider();
-                }
-                $this->inscription();
-                break;
             default:
                 $this->default_acceuil();
         }

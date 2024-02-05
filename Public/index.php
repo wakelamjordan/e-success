@@ -17,6 +17,12 @@ if (!$_SESSION) {
     $_SESSION['roles'] = json_encode(['ROLE_VISITEUR']);
 }
 
+// session_destroy();
+// exit;
+
+// print_r($_SESSION['roles']);
+// exit;
+
 require_once("../Service/extra.php");
 spl_autoload_register('charger');
 // require '../View/base.html.php';
