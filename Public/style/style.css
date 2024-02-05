@@ -1,7 +1,14 @@
 *{
 
 }
+body{
+    /* background-color: aqua; */
 
+    height: 150vh;
+}
+main{
+    min-height: 100vh;
+}
 .head{
     background-color: black;
     color: white;

@@ -484,9 +484,9 @@ VALUES
 /* user */
 INSERT INTO `e_success`.`user` (`login`, `mail`, `password`, `roles`, `date_create`, `id_people`)
 VALUES
-    ('admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_ADMIN"]', NOW(), 1),
-    ('caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
-    ('sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
+    ('admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_ADMIN","ROLE_CAISSE","ROLE_SAV"]', NOW(), 1),
+    ('caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_CAISSE"]', NOW(), 2),
+    ('sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_SAV"]', NOW(), 3),
     ('eva_martinez', 'eva.martinez@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 4),
     ('ahmed_ali', 'ahmed.ali@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 5),
     ('sophie_dubois', 'sophie.dubois@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 6),
