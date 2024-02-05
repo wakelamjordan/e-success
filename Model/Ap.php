@@ -1,7 +1,8 @@
 <?php
 class Ap
 {
-    protected $mail;
+    private $attributes=[];
+    private $mail;
     protected $phone;
     protected $name;
     protected $roles;
@@ -18,6 +19,10 @@ class Ap
     //         }
     //     }
     // }
+
+    public function __set($name,$value){
+        $this->attributes[$name]=$value;
+    }
 
     /**
      * Get the value of mail

@@ -1,14 +1,14 @@
-<h1 class=""><?= $title ?></h1>
-<h2 class="" id="message"></h2>
-<p>Remplissez le formulaire ci-dessous.</p>
-<form action="ap&action=login" id="formInscription" method="post" class="container-lg p">
+<h1 class="text-center"><?= $title ?></h1>
+<h2 id="message"></h2>
+<p class="text-center">Remplissez le formulaire ci-dessous.</p>
+<form action="user&action=validation" id="formInscription" method="post" class="container-lg p">
     <!-- <div class=""> -->
     <div class="p-2 border border-1 rounded m-1 " id='identitee'>
         <fieldset>
             <!-- mot de passe mail -->
             <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="mail" class="form-label">Mail :</label>
+                    <label for="mail" class="form-label">Mail ou numéros de téléphone:</label>
 
                     <input type="text" class="form-control" name="mail" id="mail" aria-describedby="helpMail" placeholder="" value="<?= $mail ?>" required />
                     <a href="ap&action=recuperation">Récupération de compte</a>

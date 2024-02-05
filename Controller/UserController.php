@@ -41,13 +41,12 @@ class UserController extends MyFct
                     $this->identifiant();
                 } else {
                     // si post contien quelque chose
-                    if($this->identifiantExist()==true){
-                        $this->userConnexion();
-                    }else{
-                        $this->inscription();
-                    }
+                    $this->identifiantExist();
                 }
-                // $this->seConnecter();
+                break;
+            case 'validation':
+                // en cas de validation d'un formulaire d'inscription ou de connexion
+                $this->validation();
                 break;
             case 'logout':
                 $this->seDeconnecter();
@@ -58,12 +57,22 @@ class UserController extends MyFct
                 break;
         }
     }
-    public function userConnexion(){
-
-    }
-    public function inscription(){
+    // public function userConnexion(){
+    // }
+    // public function inscription(){
         
+    // }
+    public function validation(){
+        if(key_exists('date_birth',$_POST)){
+            $obj=new Ap;
+            $test=$obj->getMail();
+            var_dump($test);
+            exit;
+        }else{
+            echo "connexion";
+        }
     }
+    //affichage du formulaire pour demander d'entrer un identifiant ou numéros de téléphone
     public function identifiant()
     {
         $file = '../View/ap/formUsername.html.php';
@@ -72,16 +81,14 @@ class UserController extends MyFct
         ];
         $this->generatePage($file, $variables);
     }
+    //quand mail ou numéros de teléphone saisi et formulaire soumis controle si mail ou numéros de téléphone existant
     public function identifiantExist()
     {
         // controle de l'identifiant retourné dans la bdd.user.mail/phone
         extract($_POST);
+
         $sql = "SELECT mail, phone FROM user WHERE mail like ? OR phone like ?";
 
-        // $variables = [
-        //     "%a%",
-        //     "%a%"
-        // ];
         $variables = [
             $mail,
             $mail
@@ -89,8 +96,27 @@ class UserController extends MyFct
 
         $exist = $this->request($sql, $variables, 'Ap');
 
-        return $exist;
+        if($exist==true){
 
+            //si existant on charge le formulaire de connexion qui demandera le mot de pass et mettra la valeur de input mail/phone précédement saisi dans l'identifiant
+            $file="../View/ap/formLogin.html.php";
+
+            $variables=[
+                'title'=>'Connexion',
+                'mail'=>$mail
+            ];
+
+            $this->generatePage($file,$variables);
+        }else{
+            // si non existant déjà dans la base de donner on charge le formulaire d'inscription
+            $file ="../View/ap/formInscription.html.php";
+
+            $variables=[
+                'title'=>'Inscription',  
+            ];
+
+            $this->generatePage($file,$variables);
+        }
     }
     // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
     function request($sql, $variables = [], $obj = '')

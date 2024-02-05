@@ -1,7 +1,7 @@
-<h1 class=""><?= $title ?></h1>
+<h1 class="text-center"><?= $title ?></h1>
 <h2 class="" id="message"></h2>
-<p>Remplissez le formulaire ci-dessous.</p>
-<form id="formInscription" method="post" class="container-lg p">
+<p class="text-center">Remplissez le formulaire ci-dessous.</p>
+<form action="user&action=validation" id="formInscription" method="post" class="container-lg" >
     <!-- <div class=""> -->
     <div class="p-2 border border-1 rounded m-1 " id='identitee'>
         <fieldset>

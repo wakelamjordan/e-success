@@ -494,8 +494,8 @@ VALUES
 INSERT INTO `e_success`.`user` (`phone`, `mail`, `password`, `roles`, `date_create`, `id_people`)
 VALUES
     ('00admin', 'john.doe@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_ADMIN"]', NOW(), 1),
-    ('00caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","CAISSE_ROLE"]', NOW(), 2),
-    ('00sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","SAV_ROLE"]', NOW(), 3),
+    ('00caisse', 'alice.smith@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_CAISSE"]', NOW(), 2),
+    ('00sav', 'bob.johnson@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER","ROLE_SAV"]', NOW(), 3),
     ('01', 'eva.martinez@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 4),
     ('02', 'ahmed.ali@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 5),
     ('03', 'sophie.dubois@example.com', '6e1b1f20acc26e074ef1f250f0b3f1ba27c1c29d', '["ROLE_USER"]', NOW(), 6),
@@ -655,4 +655,4 @@ select login, mail, password from user; */
 /* show TABLE status like 'photo';
 select Auto_increment from (show TABLE status like 'photo'); */
 
-SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'e_success' AND TABLE_NAME = 'photo';
+/* SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'e_success' AND TABLE_NAME = 'photo'; */
