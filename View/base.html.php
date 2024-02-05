@@ -32,61 +32,56 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">E SUCCESS</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- dddd -->
                     <div class="collapse navbar-collapse" id="navbarScroll">
-                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-                            style="--bs-scroll-height: 100px;">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="acceuil">Acceuil</a>
                             </li>
                             <!-- $_SESSION['login']!='visiteur' -->
 
                             <!-- caisse -->
-                            <?php if(MyFct::isGranted('ROLE_CAISSE')): ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="acceuil&action=produit">Produit</a>
-                            </li>
+                            <?php if (MyFct::isGranted('ROLE_CAISSE')) : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="acceuil&action=produit">Produit</a>
+                                </li>
                             <?php endif; ?>
 
                             <!-- sav  -->
-                            <?php if(MyFct::isGranted('ROLE_SAV')): ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="acceuil&action=client">Client</a>
-                            </li>
+                            <?php if (MyFct::isGranted('ROLE_SAV')) : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="acceuil&action=client">Client</a>
+                                </li>
                             <?php endif; ?>
                             <!-- else if -->
 
                             <!-- admin -->
-                            <?php if(MyFct::isGranted('ROLE_ADMIN')): ?>
+                            <?php if (MyFct::isGranted('ROLE_ADMIN')) : ?>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Parametre
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="user">User</a></li>
-                                    <li><a class="dropdown-item" href="role">Role</a></li>
-                                </ul>
-                            </li>
-                            <?php endif;?>
-                            <?php if(MyFct::isGranted('ROLE_USER')): ?>
-                            <!-- mon compte avec deconnexion quand on est connecté -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle bi bi-person-badge" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Mon Compte
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="user&action=logout">Se deconnecter</a></li>
-                                </ul>
-                            </li>
-                            <?php endif;?>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Parametre
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="user">User</a></li>
+                                        <li><a class="dropdown-item" href="role">Role</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (MyFct::isGranted('ROLE_USER')) : ?>
+                                <!-- mon compte avec deconnexion quand on est connecté -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle bi bi-person-badge" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Mon Compte
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="user&action=logout">Se deconnecter</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
 
                         </ul>
                         <form class="d-flex" role="search">
@@ -177,21 +172,18 @@
         </header>
     </div>
 
-    <main class="container">
-    <?=$content?>
+    <main class="container-lg ">
+        <?= $content ?>
     </main>
 
     <!--FOOTER -->
-    <footer class="container py-5 fixed-bottoma">
+    <footer class="container-fluid py-5 fixed-bottoma">
         <div class="row">
             <div class="col-12 col-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
-                    viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24">
                     <title>Product</title>
                     <circle cx="12" cy="12" r="10" />
-                    <path
-                        d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+                    <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
                 </svg>
                 <small class="d-block mb-3 text-body-secondary">&copy; 2023–2024</small>
                 <H5>E-SUCCESS</H5>
