@@ -46,23 +46,29 @@
                                 <a class="nav-link active" aria-current="page" href="acceuil">Magasin</a>
                             </li>
                             <!-- lien pour caisse et admin -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="acceuil&action=produit">Produit</a>
-                            </li>
+                            <?php if (MyFct::isGranted('ROLE_CAISSE') || MyFct::isGranted('ROLE_ADMIN')) : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="acceuil&action=produit">Produit</a>
+                                </li>
+                            <?php endif; ?>
                             <!-- lien pour sav et admin  -->
+                            <?php if (MyFct::isGranted('ROLE_SAV') || MyFct::isGranted('ROLE_ADMIN')) : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="acceuil&action=client">Client</a>
                             </li>
+                            <?php endif; ?>
                             <!-- liens pour admin uniquement -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Parametre
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="user">User</a></li>
-                                    <li><a class="dropdown-item" href="role">Role</a></li>
-                                </ul>
-                            </li>
+                            <?php if (MyFct::isGranted('ROLE_ADMIN')) : ?>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Parametre
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="user">User</a></li>
+                                        <li><a class="dropdown-item" href="role">Role</a></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
                             <!-- <li class="nav-item">
                                 <a href="user&action=login" class="btn btn-outline-success">Se connecter ou s'inscrire</a>
                             </li> -->

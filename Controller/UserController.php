@@ -65,29 +65,41 @@ class UserController extends MyFct
     public function validation()
     {
         if (key_exists('date_birth', $_POST)) {
-            // $obj = new Ap;
-            // $test = $obj->getMail();
-            // var_dump($test);
-            // exit;
+            $sql = "
+            INSERT INTO people(name,surname,date_birth) VALUES(?,?,?);INSERT INTO user (mail,password,id_people) VALUES (?,?,LAST_INSERT_ID());
+            ";
+            $variables = [
+                $_POST['name'],
+                $_POST['surname'],
+                $_POST['date_birth'],
+                $_POST['mail'],
+                $this->crypter($_POST['password']),
+            ];
+
+            $m = new Manager;
+            $m->request($sql, $variables);
+            // Manager::request($sql, $variables);
+
+            $this->throwMessage("Bienvenue " . $_POST['surname'] . ", vous pouvez maintenant vous connecter.");
         } else {
             extract($_POST);
-            
-            $sql="
+
+            $sql = "
             SELECT roles, mail ,surname, last_connexion FROM user u JOIN people p ON u.id_people = p.id  WHERE mail=? AND password = ? OR phone = ? AND password = ?;UPDATE user SET last_connexion=NOW()";
 
-            $variables=[
+            $variables = [
                 $mail,
                 $this->crypter($password),
                 $mail,
                 $this->crypter($password),
             ];
 
-            $sql=$this->request($sql,$variables);
+            $sql = $this->request($sql, $variables);
 
-            $_SESSION=[
-                'login'=>$sql['mail'],
-                'surname'=>$sql['surname'],
-                'roles'=>$sql['roles'],
+            $_SESSION = [
+                'login' => $sql['mail'],
+                'surname' => $sql['surname'],
+                'roles' => $sql['roles'],
             ];
 
             header("location:acceuil");
@@ -115,7 +127,8 @@ class UserController extends MyFct
             $mail
         ];
 
-        $exist = $this->request($sql, $variables);
+        $m = new Manager;
+        $exist=$m->request($sql, $variables);
 
         if ($exist == true) {
 
@@ -140,52 +153,54 @@ class UserController extends MyFct
         }
     }
     // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
-    function request($sql, $variables = [])
-    {
-        $connexion = $this->connexion();
+    // function request($sql, $variables = [])
+    // {
+    //     $connexion = $this->connexion();
 
-        $request = $connexion->prepare($sql);
+    //     $request = $connexion->prepare($sql);
 
-        $request->execute($variables);
+    //     $request->execute($variables);
 
-        $count = $request->rowCount();
+    //     $count = $request->rowCount();
 
-        if ($count > 1) {
-            $result = $request->setFetchMode(PDO::FETCH_ASSOC);
-            // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-            $result = $request->fetchAll();
-        } else {
-            $result = $request->setFetchMode(PDO::FETCH_ASSOC);
-            // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-            $result=$request->fetch();
-        }
-        return $result;
-    }
+    //     if ($count != 0) {
+    //         if ($count > 1) {
+    //             $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+    //             // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+    //             $result = $request->fetchAll();
+    //         } else {
+    //             $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+    //             // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+    //             $result = $request->fetch();
+    //         }
+    //         return $result;
+    //     }
+    // }
     //connexion utilisé par request
-    private function connexion()
-    {
-        //constantes de connection
-        require_once '../Config/parametre.php';
+    // private function connexion()
+    // {
+    //     //constantes de connection
+    //     require_once '../Config/parametre.php';
 
-        $host = HOST;
-        $dbname = DBNAME;
+    //     $host = HOST;
+    //     $dbname = DBNAME;
 
-        $user = USER;
-        $password = PASSWORD;
-        // formation dsn 
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+    //     $user = USER;
+    //     $password = PASSWORD;
+    //     // formation dsn 
+    //     $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
-        // try pour test de la connexion
+    //     // try pour test de la connexion
 
-        try {
-            //création de l'objet pour la connexion
-            $pdo = new PDO($dsn, $user, $password);
-            return $pdo;
-        } catch (PDOException $e) {
-            echo 'pas bon ' . $e->getMessage();
-            die;
-        }
-    }
+    //     try {
+    //         //création de l'objet pour la connexion
+    //         $pdo = new PDO($dsn, $user, $password);
+    //         return $pdo;
+    //     } catch (PDOException $e) {
+    //         echo 'pas bon ' . $e->getMessage();
+    //         die;
+    //     }
+    // }
     ///-----------------------------------------------------------------
     function supprimerUser($id)
     {
@@ -400,9 +415,30 @@ class UserController extends MyFct
     function liste()
     {
 
-        $um = new VuserManager();
+        // $um = new UserManager();
 
-        $users = $um->findAll();
+        // $users = $um->findAll();
+
+        $sql = "
+        SELECT 
+            p.id,
+            ph.path,
+            mail,
+            phone
+        FROM 
+            people p
+        JOIN
+            user u ON p.id = u.id_people 
+        JOIN
+            photo ph ON p.id_photo = ph.id;
+        ";
+
+        $m=new Manager;
+
+        $result=$m->request($sql);
+
+        // print_r($result);
+        // exit;
 
         // dans file on va préparer notre tableau pour acceuillir la liste
         $file = '../View/user/file.html.php';
@@ -411,8 +447,8 @@ class UserController extends MyFct
         // il nous faudra l'id de user, username, datecréation, ses roles et sa photo
         //test requêtage
         $variables = [
-            'lignes' => $users,
-            'nbr' => count($users),
+            'lignes' => $result,
+            'nbr' => count($result),
         ];
         $this->generatePage($file, $variables);
     }

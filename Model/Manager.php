@@ -141,7 +141,7 @@ class Manager
         return $resultat;
     }
 
-   /* function updateTable($table, $data, $id)
+    /* function updateTable($table, $data, $id)
     {
         $connexion = $this->connexion();
         $setColumn = "";
@@ -162,7 +162,7 @@ class Manager
                         $setColumn.=",$key=?";
                     }
                 */
-          /*      $values[] = $value;
+    /*      $values[] = $value;
             }
         }
 
@@ -190,22 +190,22 @@ class Manager
         $requete->execute($values);
     }*/
 
-    function updateTable($table,$data,$id){
-        $connexion=$this->connexion();
-        $setColumn="";
-        $values=[];
-        foreach($data as $key=>$value){
-            if($key!='id'){
-                $setColumn.= ($setColumn=="") ?  "$key=?"  :  ",$key=?";  // if ternaire 
-              
-                $values[]=$value;
+    function updateTable($table, $data, $id)
+    {
+        $connexion = $this->connexion();
+        $setColumn = "";
+        $values = [];
+        foreach ($data as $key => $value) {
+            if ($key != 'id') {
+                $setColumn .= ($setColumn == "") ?  "$key=?"  :  ",$key=?";  // if ternaire 
+
+                $values[] = $value;
             }
-     
         }
-        $sql="update $table set $setColumn where id=?";
-        $values[]=$id;
-      
-        $requete=$connexion->prepare($sql);
+        $sql = "update $table set $setColumn where id=?";
+        $values[] = $id;
+
+        $requete = $connexion->prepare($sql);
         $requete->execute($values);
     }
 
@@ -271,6 +271,31 @@ class Manager
         $requete->execute();
         $tables = $requete->fetchAll(PDO::FETCH_ASSOC);
         return $tables;
+    }
+
+    // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
+    function request($sql, $variables = [])
+    {
+        $connexion = $this->connexion();
+
+        $request = $connexion->prepare($sql);
+
+        $request->execute($variables);
+
+        $count = $request->rowCount();
+
+        if ($count != 0) {
+            if ($count > 1) {
+                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                $result = $request->fetchAll();
+            } else {
+                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                $result = $request->fetch();
+            }
+            return $result;
+        }
     }
 }
 

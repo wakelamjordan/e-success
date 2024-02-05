@@ -19,6 +19,8 @@ public function update($data,$id){
 public function insert($data){
     $this->insertTable('user',$data);
 }
+
+//à voir
 public function getDescribe(){
     $resultat=$this->getDescribeTable('user');
     return $resultat;

@@ -2,13 +2,19 @@
  
 class MyFct{
 
+    // function jordanIsGranted($role_granted=[]){
+    //     $role_user=$_SESSION['roles'];
+    //     $role_user=json_decode($role_user);
+    //     var_dump($role_user);
+    //     exit;
+    // }
+
     function notGranted($role_libelle){
 
         $granted=self::isGranted($role_libelle); //comme isGranted est static alors on utilise self:: au lieu de $this->$_COOKIE
         if($granted){
             return false;
-        }
-        else{
+        }else{
             return true;
         }
     }

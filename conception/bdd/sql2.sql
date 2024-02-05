@@ -100,11 +100,11 @@ CREATE TABLE
         `name` VARCHAR(255) NOT NULL,
         `surname` VARCHAR(255) NOT NULL,
         `date_birth` DATE NOT NULL,
-        `place_birth` VARCHAR(255) NOT NULL,
-        `id_nationality` INT (12) NOT NULL,
+        `place_birth` VARCHAR(255),
+        `id_nationality` INT (12),
         `id_photo` INT (12) NOT NULL DEFAULT 1,
         `id_collaborateur` INT (12),
-        `id_civility` INT (12) NOT NULL,
+        `id_civility` INT (12),
         FOREIGN KEY (`id_nationality`) REFERENCES `e_success`.`nationality` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (`id_photo`) REFERENCES `e_success`.`photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (`id_collaborateur`) REFERENCES `e_success`.`collaborateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -115,7 +115,7 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `e_success`.`user` (
         `id` INT (12) NULL AUTO_INCREMENT,
-        `phone` VARCHAR(255) NOT NULL UNIQUE,
+        `phone` VARCHAR(255) UNIQUE,
         `mail` VARCHAR(255) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
         `roles` JSON DEFAULT '["ROLE_USER"]',
@@ -656,5 +656,10 @@ select login, mail, password from user; */
 select Auto_increment from (show TABLE status like 'photo'); */
 
 /* SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'e_success' AND TABLE_NAME = 'photo'; */
-
+/* 
 SELECT * FROM user WHERE mail= 'admin' AND password = '1234' OR phone = '0' AND password = '4321';
+
+            INSERT INTO people(name,surname,date_birth) VALUES(?,?,?);INSERT INTO user (mail,password,id_people) VALUES (?,?,LAST_INSERT_ID); */
+
+use e_success;
+
