@@ -2,98 +2,152 @@
 <html lang="en">
 
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Document</title>
-
+    <title></title>
     <link rel="stylesheet" href="./Public/style/fontawesome-free-6.5.1-web/css/all.css">
     <link rel="stylesheet" href="./Public/style/bootstrap-5.3.2-dist/css/bootstrap.css">
     <link rel="stylesheet" href="./Public/style/style.css">
-    <script src="./Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src=".Public/style/bootstrap-5.3.2-dist/js/bootstrap.min.js" defer></script>
-    <script src="./Public/js/myScript.js" defer></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
+    <script src="./Public/js/myScript.js" defer></script>
+    <script src="./Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<!--NAVBAR-->
-<div class="promo">
-    <p>Livraison GRATUITE dans toute L'EUROPE🌎</p>
-</div>
-
-<!--LIEN UTILE-->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="acceuil">ACCEUIL</a></li>
-            <li class="nav-item"><a class="nav-link" href="acceuil">PRODUIT</a></li>
-            <?php if($_SESSION['login']!='visiteur'): ?>
-                
- 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-togglea" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    MON COMPTE
-                </a>
-                <div class="dropdown-menuaa" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-itema" href="user&action=logout">se deconnecter</a>
-                    <?php else :?>
 
 
-                   
-                    <li class="nav-item"><a class="nav-link" href="user&action=login">CONNEXION</a></li>
-                    <?php endif; ?>
-                    <?php if(MyFct::isGranted('ROLE_ADMIN')): ?>
-
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-togglea" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    PARAMETRE
-                </a>
-                <div class="dropdown-menua" aria-labelledby="navbarDropdowna">
-                    <a class="dropdown-item" href="user">USER</a>
-                    <a class="dropdown-item" href="role">ROLE</a>
-                </div>
-            </li>
-
-            <?php endif; ?>
-            <li class="nav-item"><a class="nav-link" href="acceuil&action=create">INSCRIPTION</a></li>
-        </ul>
-        <div class="right">
-            <h1 class="text-dark"> E-SUCESS </h1>
+<body class="d-flex flex-column ">
+    <div class="">
+        <div class="promo">
+            <p>Livraison GRATUITE dans toute L'EUROPE🌎</p>
         </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-
-</header>
-
-<!--BODY-->
-<body>
-    <div class="main">
-        <?=$content?>
+        <!-- HEADER -->
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">E SUCCESS</a>
+                    <!-- bouton toggle -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <!-- groupe navigation site -->
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <!-- lien pour tous -->
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="acceuil">Acceuil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="acceuil">Magasin</a>
+                            </li>
+                            <!-- lien pour caisse et admin -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="acceuil&action=produit">Produit</a>
+                            </li>
+                            <!-- lien pour sav et admin  -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="acceuil&action=client">Client</a>
+                            </li>
+                            <!-- liens pour admin uniquement -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Parametre
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="user">User</a></li>
+                                    <li><a class="dropdown-item" href="role">Role</a></li>
+                                </ul>
+                            </li>
+                            <!-- mon compte avec deconnexion quand on est connecté -->
+                            <!-- <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle bi bi-person-badge" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mon Compte
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="user&action=logout">Se deconnecter</a></li>
+                                </ul>
+                            </li> -->
+                        </ul>
+                        <!-- groupe connexion compte création compte -->
+                        <ul class="nav justify-content-end flex-md-row">
+                            <!-- si connecté afficher -->
+                            <li class="nav-item">
+                                <!-- <a class="nav-link" href="user&action=logout">Se deconnecter</a> -->
+                            </li>
+                            <!--  -->
+                            <li class="nav-itema">
+                                <!-- si connecté afficher -->
+                                <!-- <a href="user&action=login" class="nav-link">Mon Compte</a> -->
+                                <!--  -->
+                                <a href="user&action=login" class="btn btn-outline-success">Se connecter ou s'inscrire</a>
+                            </li>
+                        </ul>
+                    </div>
+            </nav>
+        </header>
     </div>
 
-</body>
+    <main class="container-lg my-3">
+        <?= $content ?>
+    </main>
 
-<!--FOOTER-->
-<footer>
-    <div class="w-50px">
-    <i class="fa-brands fa-square-twitter"></i>
-    <i class="fa-brands fa-square-facebook"></i>
-</footer>
-
+    <!--FOOTER -->
+    <div class="container-fluid bg-black">
+        <footer class="container py-5 fixed-bottoma text-light ">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24">
+                        <title>Product</title>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+                    </svg>
+                    <small class="d-block mb-3 text-light">&copy; 2023–2024</small>
+                    <H5>E-SUCCESS</H5>
+                    <p>Nous sommes une équipe de 4 personnes passionnées par le développement, et nous avons développé ce
+                        site pour vendre des produits spécialisés dans le domaine du sport.</p>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Politique</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">Conditions générales de vente</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Politique de remboursement</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Politique de confidentialité</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">A propos de nous</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Politique d'expédition</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Nous contacter</h5>
+                    <p>Le service clientèle est ouvert du lundi au dimanche de 9h à 18h.</p>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">contact@essuccess.com</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">24/7</a></li>
+                        <form action="envoyer_mail.php" method="post">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Abonnez-vous à nos emails :</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </form>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Besoin d'aide ?</h5>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">Suivre vos commandes</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Service Client</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Methode de paiement</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

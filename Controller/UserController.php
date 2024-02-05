@@ -13,19 +13,19 @@ class UserController extends MyFct
                 // à défaut quelque soit ce qui sera rentré comme action la méthode liste sera appliqué
             case 'liste':
                 // if ($this->notGranted('ROLE_ADMIN')) {
-                    if ($this->notGranted('ROLE_ADMIN'))$this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
-                    // die;
+                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                // die;
                 // }
                 // die;
                 $this->liste();
                 break;
             case 'show':
-                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
+                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
 
                 $this->afficher($id);
                 break;
             case 'modify':
-                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
+                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->modifier($id);
                 break;
             case 'insert':
@@ -35,20 +35,111 @@ class UserController extends MyFct
                 $this->enregistrerVuser($_POST, $_FILES);
                 break;
             case 'login':
-
-                // die;
-                if ($_POST) {
-                    $this->valider($_POST);
+                // si variable global post vide
+                if (empty($_POST)) {
+                    // fonction pour aficher formulaire afin de récupérer le mail ou le phone
+                    $this->identifiant();
+                } else {
+                    // si post contien quelque chose
+                    $this->searchIdentifiant();
                 }
-                $this->seConnecter();
+                // $this->seConnecter();
                 break;
             case 'logout':
                 $this->seDeconnecter();
                 break;
             case 'delete':
-                if($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!"); 
+                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->supprimerUser($id);
                 break;
+        }
+    }
+    public function identifiant()
+    {
+        $file = '../View/ap/formUsername.html.php';
+        $variables = [
+            'title' => 'Connexion ou création de compte en 1 minute',
+        ];
+        $this->generatePage($file, $variables);
+    }
+    public function searchIdentifiant()
+    {
+        // controle de l'identifiant retourné dans la bdd.user.mail/phone
+        extract($_POST);
+        $sql = "SELECT mail, phone FROM user WHERE mail like ? OR phone like ?";
+
+        // $variables = [
+        //     "%a%",
+        //     "%a%"
+        // ];
+        $variables = [
+            $mail,
+            $mail
+        ];
+
+        $obj = $this->request($sql, $variables, 'Ap');
+
+        // $first = $obj[0];
+
+        // $phone = $first->getPhone();
+
+        // $user;
+
+        // echo $phone;
+
+        var_dump($obj->getPhone());
+
+        exit;
+    }
+    // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
+    function request($sql, $variables = [], $obj = '')
+    {
+        $connexion = $this->connexion();
+
+        $request = $connexion->prepare($sql);
+
+        $request->execute($variables);
+
+        $count = $request->rowCount();
+
+        if ($count > 0) {
+            if ($count > 1) {
+                $result=$request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                // $result = $request->fetchAll();
+            } else {
+                $result = $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                // $result=$request->fetch();
+            }
+            return $result;
+        } else {
+            return null;
+        }
+    }
+    //connexion utilisé par request
+    private function connexion()
+    {
+        //constantes de connection
+        require_once '../Config/parametre.php';
+
+        $host = HOST;
+        $dbname = DBNAME;
+
+        $user = USER;
+        $password = PASSWORD;
+        // formation dsn 
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+
+        // try pour test de la connexion
+
+        try {
+            //création de l'objet pour la connexion
+            $pdo = new PDO($dsn, $user, $password);
+            return $pdo;
+        } catch (PDOException $e) {
+            echo 'pas bon ' . $e->getMessage();
+            die;
         }
     }
     ///-----------------------------------------------------------------

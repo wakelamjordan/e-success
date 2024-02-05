@@ -1,22 +1,23 @@
 <?php
 class Ap
 {
-    private $mail;
-    private $phone;
-    private $name;
-    private $roles;
-    public function __construct($data)
-    {
-        if (is_array($data)) {
-            foreach ($data as $key => $value) {
-                $set = "set" . ucfirst($key);
+    protected $mail;
+    protected $phone;
+    protected $name;
+    protected $roles;
 
-                if (method_exists($this, $set)) {
-                    $this->$set($value);
-                }
-            }
-        }
-    }
+    // public function __construct($data)
+    // {
+    //     if (is_array($data)) {
+    //         foreach ($data as $key => $value) {
+    //             $set = "set" . ucfirst($key);
+
+    //             if (method_exists($this, $set)) {
+    //                 $this->$set($value);
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Get the value of mail
