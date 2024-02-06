@@ -94,7 +94,10 @@ class UserController extends MyFct
                 $this->crypter($password),
             ];
 
-            $sql = $this->request($sql, $variables);
+          
+            $m = new Manager;
+            $m->request($sql, $variables);
+            $sql=$m->request($sql, $variables);
 
             $_SESSION = [
                 'login' => $sql['mail'],
