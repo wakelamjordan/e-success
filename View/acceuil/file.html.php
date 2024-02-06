@@ -11,6 +11,11 @@
   <body> -->
   <!-- <img src="./Public/img/application.png" alt="" class="img-fluid"> -->
 
+
+  
+        <!-- section LOADER-->
+
+     
         <!-- Section CAROUSEL-->
     <div id="carousel" class="carousel slide">
       <div class="carousel-inner">
@@ -18,7 +23,7 @@
         
           <img src="./Public/img/img2.jpg" class="d-block w-100 img-fluid " alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>Défiez vos limites</h5>
+            <h5>Défiez <span class="auto-typing"></span></h5>
             <p>Transformez votre passion en performance avec notre gamme de produits de pointe.</p>
             <p<a href="#" class="btn btn-secondary mt-2">En savoir plus</a></p>
           </div>
@@ -86,8 +91,6 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
   <li>Système de fixation incassable pour une sécurité optimale</li>
   <li>Garantie de 5 ans pour une tranquillité d'esprit totale.</li>
 </ul>
-
-
               <a href="#"class="btn btn-warning">J'EN VEUX UN !</a>
             </div>
           </div>
@@ -95,6 +98,7 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
       </div>
 
       <div class="container">
+        <div id=abouts>
         <div class="row">
             <div class="col-lg-8 col-md-12 col-12 pe-lg-5 mt-md-5">
                 <div class="about-text">
@@ -112,10 +116,9 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
                    
                 </div>
             </div>
+            </div>
         </div>
     </div>
-  
-
     </section>
 
     
@@ -127,7 +130,7 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
           <div class="col-md-12">
             <div class="section-header text-center pb-5">
               <h2>Pourquoi Nous ?</h2>
-            <p>Choisissez-nous parce que nous nous engageons à offrir une expérience exceptionnelle à nos clients. Avec une attention minutieuse à la qualité, un service clientèle exceptionnel et des offres compétitives, nous nous efforçons de vous fournir les meilleurs produits et services sur le marché.</p>
+            <h5>Choisissez-nous parce que nous nous engageons à offrir une expérience exceptionnelle à nos clients. Avec une attention minutieuse à la qualité, un service clientèle exceptionnel et des offres compétitives, nous nous efforçons de vous fournir les meilleurs produits et services sur le marché.</h5>
           </div>
 
           <div class="row">
@@ -144,7 +147,7 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
             <div class="col-12 col-md-12 col-lg-4">
               <div class="card text-white text-center bg-dark pb-2">
                 <div class="card-body">
-                  <i class="bi bi-subtract"></i>
+                <i class="bi bi-box-seam-fill"></i>
                   <h3 class="card-title">Livraison Express</h3>
                   <p class="lead">Pour une expérience sans égal, nous vous promettons des livraisons ultra-rapides, garanties entre 1 à 3 jours, assurant ainsi un service optimal et une satisfaction totale pour chacune de vos commandes.</p>
                   <button class="btn btn-warning  text-dark">En savoir plus</button>
@@ -154,9 +157,9 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
             <div class="col-12 col-md-12 col-lg-4">
               <div class="card text-white text-center bg-dark pb-2">
                 <div class="card-body">
-                  <i class="bi bi-subtract"></i>
+                <i class="bi bi-chat-right-text"></i>
                   <h3 class="card-title">Service Client</h3>
-                  <p class="lead">Dotés d'un service clientèle francophone disponible 24h/24, nous sommes là pour répondre à vos questions, garantissant ainsi votre entière satisfaction et une expérience client exceptionnelle.</p>
+                  <p class="lead">Dotés d'un service clientèle francophone disponible 24h/24 - 7j/7, nous sommes là pour répondre à vos questions, garantissant ainsi votre entière satisfaction et une expérience client exceptionnelle.</p>
                   <button class="btn btn-warning  text-dark">En savoir plus</button>
                 </div>
               </div>
@@ -165,6 +168,27 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
         </div>
       </div>
     </section>
+
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+     <!-- JS -->
+    <script>
+      let typed = new Typed('.auto-typing',{
+        strings:[' la routine','vos peurs','Vous.'],
+        typeSpeed: 100,
+        backSpeed: 100,
+        loop: true,
+        fadeOut: true,
+        fadeOutClass:'typed-fade-out',
+        fadeOutDelay: 500
+      })
+
+
+    
+
+    </script>
+
 
     <!--Section CLIENT 
 
@@ -191,7 +215,6 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
   
 
 
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html> -->
