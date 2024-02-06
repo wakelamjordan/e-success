@@ -1,4 +1,7 @@
 <?php
+
+//toutes les actions lié à la connexion et à la création de compte se trouvent ici, voir si il ne serait pas plus judicieu de les mettre dans acceuil ctrl par exemple
+
 class UserController extends MyFct
 {
     function __construct()
@@ -114,50 +117,50 @@ class UserController extends MyFct
         // exit;
         if (key_exists('date_birth', $_POST)) {
 
-        // print_r($_POST);
+            // print_r($_POST);
 
             //chose à faire en ajax je pense pour avoir une réponse  directe dans le formulaire de création de compte sans recharger la page et éffacer le formulaire, sinon l'utilisateur risque de devoir tout réecrire
-            $d=new UserManager;
-            $result=$d->findByMailPhone();
+            $d = new UserManager;
+            $result = $d->findByMailPhone();
 
             // var_dump($result);
 
             // exit;
-            
-            if($result!=null){
-                $m=new MyFct;
+
+            if ($result != null) {
+                $m = new MyFct;
                 $m->throwMessage('Mail déjà utilisé.');
             }
             // créer nouveau compte
             // $sql = "
             // INSERT INTO people(name,surname,date_birth) VALUES(?,?,?);INSERT INTO user (mail,password,id_people) VALUES (?,?,LAST_INSERT_ID());
             // ";
-            
+
             // $variables = [
-                //     $_POST['name'],
-                //     $_POST['surname'],
-                //     $_POST['date_birth'],
-                //     $_POST['mail'],
-                //     $this->crypter($_POST['password']),
-                // ];
-                
-                
-                
-                //insertion dans people de name surname date_birth;
-                
+            //     $_POST['name'],
+            //     $_POST['surname'],
+            //     $_POST['date_birth'],
+            //     $_POST['mail'],
+            //     $this->crypter($_POST['password']),
+            // ];
+
+
+
+            //insertion dans people de name surname date_birth;
+
 
             // exit;
-            
+
             $p = new PeopleManager;
             $p->insertPeople();
-            
+
             // Manager::request($sql, $variables);
-            
+
             //insertion dans user de mail et password et last_insert_id()
 
-            $u=new UserManager;
+            $u = new UserManager;
             $u->insertByLast_id();
-            
+
             // exit;
             // print_r($variables);
 
@@ -165,20 +168,13 @@ class UserController extends MyFct
 
             //connexion automatique aprés réussite d'inscription
 
-            
-            
+
+
             $this->throwMessage("Bienvenue " . $_POST['surname'] . ", vous pouvez maintenant vous connecter.");
         } else {
             // rechercher dans la bdd si mail/phone avec password ok et maj last_connexion
             extract($_POST);
             // requetage user avec mail password mail password
-
-            $variables = [
-                $mail,
-                $this->crypter($password),
-                $mail,
-                $this->crypter($password),
-            ];
 
             $u = new UserManager;
             $u = $u->findByMailPhonePassword();
