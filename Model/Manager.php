@@ -3,20 +3,192 @@
 require_once("../Config/parametre.php");
 class Manager
 {
+    private static $connexion;
 
-    public function connexion($host = HOST, $dbname = DBNAME, $user = USER, $password = PASSWORD)
+
+    // private $_instance;
+
+    // public function connexion($host = HOST, $dbname = DBNAME, $user = USER, $password = PASSWORD)
+    // {
+    //     if(is_null(self::$_instance))
+
+    //     $dns = "mysql:host=$host;dbname=$dbname;charset=utf8";
+
+    //     try {
+    //         $pdo = new PDO($dns, $user, $password);
+    //         return $pdo;
+    //     } catch (PDOException $e) {
+    //         echo "<h1>Erreur de connexion à la base de données: " . $e->getMessage() . "</h1>";
+    //         die;
+    //     }
+    // }
+    public function insert($table, $variables)
     {
 
-        $dns = "mysql:host=$host;dbname=$dbname;charset=utf8";
+        // var_dump($table);
 
-        try {
-            $pdo = new PDO($dns, $user, $password);
-            return $pdo;
-        } catch (PDOException $e) {
-            echo "<h1>Erreur de connexion à la base de données: " . $e->getMessage() . "</h1>";
-            die;
+
+
+        $field = '';
+
+        $pi = '';
+
+        $values = [];
+
+        foreach ($variables as $key => $value) {
+
+            $field == '' ? $field .= "$key" : $field .= ",$key";
+
+            $pi == '' ? $pi .= "?" : $pi .= ",?";
+
+            $values[] = $value;
+        }
+
+        $sql = "
+        INSERT INTO
+            $table($field)
+        VALUES ($pi)";
+
+        // exit;
+
+
+        $this->request($sql, $values);
+    }
+    //bien trop compléxe à mon avis, des fois on peux avoir mail=? AND password=? OR phone=? AND password=? comment déterminer quand on aura des or ou des and...trop chaud, soit le select se fera à partir de request avec une requete écrite en dur dans le manager de la table dédié, soit on par du principe que select est pour un select tranquile à base juste de AND et que si on veux des and et or on passe par request avec une requête écrite en dur (option intéressante mais faut bien que la doc de ces fonctions soient faites pour expliquer), on part sur ça
+    public function select($table, $variables = [])
+    {
+        $sql = "
+        SELECT
+            *
+        FROM
+            $table";
+
+        $where = null;
+        $key = null;
+        $value = null;
+        $values = null;
+
+        if (!empty($variables)) {
+            foreach ($variables as $key => $value) {
+                $where == null ? $where .= " WHERE $key=?" : $where .= " OR $key=?";
+                $values[] = $value;
+            }
+            $sql .= $where;
+        }
+
+        // var_dump($sql);
+        // exit;
+
+        $result = $this->request($sql, $values);
+
+        // $result=empty($variables)?$this->request($sql):null;
+
+        return $result;
+    }
+
+    public function update($table, $variables_set = [],$variables_condition=[])
+    {
+        $sql = "
+        UPDATE
+            $table";
+
+        $set = null;
+        $condition = null;
+        $key = null;
+        $value = null;
+        $values = null;
+
+        //traitement de la parti set avec collone = ? et fabrication de values qui remplacera les ?
+        if (!empty($variables_set)) {
+            foreach ($variables_set as $key => $value) {
+                $set == null ? $set .= " SET $key=?" : $set .= ",$key=?";
+                $values[] = $value;
+            }
+            $sql .= $set;
+        }else{
+            $m=new MyFct;
+            $m->throwMessage("érreur");
+        }
+
+        //traitement de la partir condition
+
+        if (!empty($variables_condition)) {
+            foreach ($variables_condition as $key => $value) {
+                $condition == null ? $condition .= " WHERE $key=?" : $condition .= ",$key=?";
+                $values[] = $value;
+            }
+            $sql .= $condition;
+        }else{
+            $m=new MyFct;
+            $m->throwMessage("érreur");
+        }
+
+        // var_dump($values);
+        // exit;
+
+        $result = $this->request($sql, $values);
+
+        // $result=empty($variables)?$this->request($sql):null;
+
+        return $result;
+    }
+
+
+    // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
+    public function request($sql, $variables = [])
+    {
+        $connexion = self::getConnexion();
+
+        $request = $connexion->prepare($sql);
+
+        $request->execute($variables);
+
+        $count = $request->rowCount();
+
+        if ($count != 0) {
+            if ($count > 1) {
+                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                $result = $request->fetchAll();
+            } else {
+                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
+                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
+                $result = $request->fetch();
+            }
+            // echo 'ejeje';
+            return $result;
         }
     }
+    /**
+     * Get the value of connexion
+     */
+    public static function getConnexion()
+    {
+        $host = HOST;
+        $dbname = DBNAME;
+        $user = USER;
+        $password = PASSWORD;
+
+
+        // exit;
+        // $user=self::$user;
+        // $password=self::$password;
+
+        if (self::$connexion === null) {
+
+            $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+
+            try {
+                self::$connexion = new PDO($dsn, $user, $password);
+                // return $pdo;
+            } catch (PDOException $e) {
+                echo "<h1>Erreur de connexion à la base de données: " . $e->getMessage() . "</h1>";
+                die;
+            }
+        }
+        return self::$connexion;
+    }
+
 
 
     /*public function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
@@ -271,31 +443,6 @@ class Manager
         $requete->execute();
         $tables = $requete->fetchAll(PDO::FETCH_ASSOC);
         return $tables;
-    }
-
-    // avec la requete, les variables à mettre dans execute, et l'objet à retourner(class existante)
-    function request($sql, $variables = [])
-    {
-        $connexion = $this->connexion();
-
-        $request = $connexion->prepare($sql);
-
-        $request->execute($variables);
-
-        $count = $request->rowCount();
-
-        if ($count != 0) {
-            if ($count > 1) {
-                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
-                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                $result = $request->fetchAll();
-            } else {
-                $result = $request->setFetchMode(PDO::FETCH_ASSOC);
-                // $request->setFetchMode(PDO::FETCH_CLASS, $obj);
-                $result = $request->fetch();
-            }
-            return $result;
-        }
     }
 }
 

@@ -62,30 +62,116 @@ class UserController extends MyFct
     // public function inscription(){
 
     // }
+    //liste de tout les utilisateurs accessible en role admin dans onglet parametres
+    function liste()
+    {
+
+        // $um = new UserManager();
+
+        // $users = $um->findAll();
+
+        // $sql = "
+        // SELECT 
+        //     p.id,
+        //     ph.path,
+        //     mail,
+        //     phone
+        // FROM 
+        //     people p
+        // JOIN
+        //     user u ON p.id = u.id_people 
+        // JOIN
+        //     photo ph ON p.id_photo = ph.id;
+        // ";
+
+        // $m=new Manager;
+
+        // $result=$m->request($sql);
+
+        $um = new UserManager;
+
+        $result = $um->findAll();
+
+        // print_r($result);
+        // exit;
+
+        // dans file on va préparer notre tableau pour acceuillir la liste
+        $file = '../View/user/file.html.php';
+        // dans variable il faudra les différentes variables nécéssaire à file pour créer le tableau
+        // pour obtenir ces variables on a besoin de requêter la bdd
+        // il nous faudra l'id de user, username, datecréation, ses roles et sa photo
+        //test requêtage
+        $variables = [
+            'lignes' => $result,
+            'nbr' => count($result),
+        ];
+        $this->generatePage($file, $variables);
+    }
     public function validation()
     {
+
+        // print_r($_POST);
+        // exit;
         if (key_exists('date_birth', $_POST)) {
-            $sql = "
-            INSERT INTO people(name,surname,date_birth) VALUES(?,?,?);INSERT INTO user (mail,password,id_people) VALUES (?,?,LAST_INSERT_ID());
-            ";
-            $variables = [
-                $_POST['name'],
-                $_POST['surname'],
-                $_POST['date_birth'],
-                $_POST['mail'],
-                $this->crypter($_POST['password']),
-            ];
 
-            $m = new Manager;
-            $m->request($sql, $variables);
+        // print_r($_POST);
+
+            //chose à faire en ajax je pense pour avoir une réponse  directe dans le formulaire de création de compte sans recharger la page et éffacer le formulaire, sinon l'utilisateur risque de devoir tout réecrire
+            $d=new UserManager;
+            $result=$d->findByMailPhone();
+
+            // var_dump($result);
+
+            // exit;
+            
+            if($result!=null){
+                $m=new MyFct;
+                $m->throwMessage('Mail déjà utilisé.');
+            }
+            // créer nouveau compte
+            // $sql = "
+            // INSERT INTO people(name,surname,date_birth) VALUES(?,?,?);INSERT INTO user (mail,password,id_people) VALUES (?,?,LAST_INSERT_ID());
+            // ";
+            
+            // $variables = [
+                //     $_POST['name'],
+                //     $_POST['surname'],
+                //     $_POST['date_birth'],
+                //     $_POST['mail'],
+                //     $this->crypter($_POST['password']),
+                // ];
+                
+                
+                
+                //insertion dans people de name surname date_birth;
+                
+
+            // exit;
+            
+            $p = new PeopleManager;
+            $p->insertPeople();
+            
             // Manager::request($sql, $variables);
+            
+            //insertion dans user de mail et password et last_insert_id()
 
+            $u=new UserManager;
+            $u->insertByLast_id();
+            
+            // exit;
+            // print_r($variables);
+
+            // exit;
+
+            //connexion automatique aprés réussite d'inscription
+
+            
+            
             $this->throwMessage("Bienvenue " . $_POST['surname'] . ", vous pouvez maintenant vous connecter.");
         } else {
+            // rechercher dans la bdd si mail/phone avec password ok et maj last_connexion
             extract($_POST);
-
-            $sql = "
-            SELECT roles, mail ,surname, last_connexion FROM user u JOIN people p ON u.id_people = p.id  WHERE mail=? AND password = ? OR phone = ? AND password = ?;UPDATE user SET last_connexion=NOW()";
+            // requetage user avec mail password mail password
 
             $variables = [
                 $mail,
@@ -94,14 +180,34 @@ class UserController extends MyFct
                 $this->crypter($password),
             ];
 
-            $sql = $this->request($sql, $variables);
+            $u = new UserManager;
+            $u = $u->findByMailPhonePassword();
 
+            // var_dump($u);
+            // exit;
+
+            //si il n'y a pas de correspondence dans user
+            if ($u == NULL) {
+
+                $m = new MyFct;
+                $m->throwMessage("Identifiant ou mot de passe incorrect.");
+                // $m->throwMessage("Identifiant ou mot de passe incorrect.");
+            }
+            // requetage people par id de l'user de la requete precedente 
+
+            $p = new PeopleManager;
+            $p = $p->findById($u['id_people']);
+
+            // print_r($p);
+
+            // mise en variable session du mail de l'user ses roles et du surnom de people
             $_SESSION = [
-                'login' => $sql['mail'],
-                'surname' => $sql['surname'],
-                'roles' => $sql['roles'],
+                'login' => $u['mail'],
+                'roles' => $u['roles'],
+                'surname' => $p['surname'],
             ];
 
+            //redirection vers la page 'acceuil
             header("location:acceuil");
         }
     }
@@ -128,7 +234,7 @@ class UserController extends MyFct
         ];
 
         $m = new Manager;
-        $exist=$m->request($sql, $variables);
+        $exist = $m->request($sql, $variables);
 
         if ($exist == true) {
 
@@ -409,47 +515,6 @@ class UserController extends MyFct
 
         $file = "../View/user/formFile.html.php";
 
-        $this->generatePage($file, $variables);
-    }
-
-    function liste()
-    {
-
-        // $um = new UserManager();
-
-        // $users = $um->findAll();
-
-        $sql = "
-        SELECT 
-            p.id,
-            ph.path,
-            mail,
-            phone
-        FROM 
-            people p
-        JOIN
-            user u ON p.id = u.id_people 
-        JOIN
-            photo ph ON p.id_photo = ph.id;
-        ";
-
-        $m=new Manager;
-
-        $result=$m->request($sql);
-
-        // print_r($result);
-        // exit;
-
-        // dans file on va préparer notre tableau pour acceuillir la liste
-        $file = '../View/user/file.html.php';
-        // dans variable il faudra les différentes variables nécéssaire à file pour créer le tableau
-        // pour obtenir ces variables on a besoin de requêter la bdd
-        // il nous faudra l'id de user, username, datecréation, ses roles et sa photo
-        //test requêtage
-        $variables = [
-            'lignes' => $result,
-            'nbr' => count($result),
-        ];
         $this->generatePage($file, $variables);
     }
 }
