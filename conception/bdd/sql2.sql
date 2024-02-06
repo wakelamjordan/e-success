@@ -101,7 +101,7 @@ CREATE TABLE
         `surname` VARCHAR(255) NOT NULL,
         `date_birth` DATE NOT NULL,
         `place_birth` VARCHAR(255),
-        `id_nationality` INT (12),
+        `id_nationality` INT (12)NOT NULL DEFAULT 1,
         `id_photo` INT (12) NOT NULL DEFAULT 1,
         `id_collaborateur` INT (12),
         `id_civility` INT (12),
@@ -211,6 +211,7 @@ INSERT INTO `e_success`.`collaborateur` (`libelle`) VALUES
 
 /* nationality */
 INSERT INTO `e_success`.`nationality` (`libelle`) VALUES
+    ('NC'),
     ('Spanish'),
     ('Afghan'),
     ('Albanian'),
@@ -663,3 +664,15 @@ SELECT * FROM user WHERE mail= 'admin' AND password = '1234' OR phone = '0' AND 
 
 use e_success;
 
+        INSERT INTO 
+            people(
+                name,
+                surname,
+                date_birth
+                ) 
+            VALUES(
+                'eieieieie',
+                'ieieieieie',
+                '2024-02-24'
+            );
+SELECT LAST_INSERT_ID();
