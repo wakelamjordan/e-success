@@ -67,7 +67,9 @@
             }
         });
 
-        if (count > 1) {
+        
+
+        if (count > 1 || count == 0) {
             alert("Pour afficher veuillez sélectionner qu'un seul compte.");
             return;
         };
