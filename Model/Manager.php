@@ -189,7 +189,7 @@ class Manager
         return self::$connexion;
     }
 
-
+// ----------------------------------------------------------------------
 
     /*public function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
 

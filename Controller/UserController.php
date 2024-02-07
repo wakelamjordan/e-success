@@ -25,7 +25,7 @@ class UserController extends MyFct
             case 'show':
                 if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
 
-                $this->afficher($id);
+                $this->show($id);
                 break;
             case 'modify':
                 if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
@@ -65,8 +65,19 @@ class UserController extends MyFct
     // public function inscription(){
 
     // }
+    public function show($id)
+    {
+        // print_r($_GET);
+        $u=new UserManager;
+
+        $result=$u->findById($id);
+
+        $result=json_encode($result);
+
+        echo $result;
+    }
     //liste de tout les utilisateurs accessible en role admin dans onglet parametres
-    function liste()
+    public function liste()
     {
 
         // $um = new UserManager();

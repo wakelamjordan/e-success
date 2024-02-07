@@ -664,15 +664,15 @@ SELECT * FROM user WHERE mail= 'admin' AND password = '1234' OR phone = '0' AND 
 
 use e_success;
 
-        INSERT INTO 
-            people(
-                name,
-                surname,
-                date_birth
-                ) 
-            VALUES(
-                'eieieieie',
-                'ieieieieie',
-                '2024-02-24'
-            );
-SELECT LAST_INSERT_ID();
+--         INSERT INTO 
+--             people(
+--                 name,
+--                 surname,
+--                 date_birth
+--                 ) 
+--             VALUES(
+--                 'eieieieie',
+--                 'ieieieieie',
+--                 '2024-02-24'
+--             );
+-- SELECT LAST_INSERT_ID();
