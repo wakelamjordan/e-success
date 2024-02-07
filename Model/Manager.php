@@ -189,7 +189,7 @@ class Manager
         return self::$connexion;
     }
 
-
+// ----------------------------------------------------------------------
 
     /*public function connexion($host=HOST,$dbname=DBNAME,$user=USER,$password=PASSWORD){
 
@@ -210,7 +210,7 @@ class Manager
     function findAllByConditionTable($table, $dataCondition = [], $order = '', $type = 'obj')
     { // order assure le clasement du resultats
 
-        $connexion = $this->connexion(); //recuperation de la connexion à la bdd
+        $connexion = self::getConnexion(); //recuperation de la connexion à la bdd
         $condition = ''; //on initialise la variable $condition à vide
         $values = []; //la variable $value va etre injectée dans la methode execute
         foreach ($dataCondition as $key => $value) { // a chaque élément du tableau $dataCondition on le recupere dans la variable $value et $key correspond à l'indice de l'élément
@@ -256,7 +256,7 @@ class Manager
     function findOneByConditionTable($table, $dataCondition = [], $type = 'obj')
     {
 
-        $connexion = $this->connexion(); //recuperation de la connexion à la bdd
+        $connexion = self::getConnexion(); //recuperation de la connexion à la bdd
         $condition = ''; //on initialise la variable $condition à vide
         $values = []; //la variable $value va etre injectée dans la methode execute
         foreach ($dataCondition as $key => $value) { // a chaque élément du tableau $dataCondition on le recupere dans la variable $value et $key correspond à l'indice de l'élément
@@ -295,7 +295,7 @@ class Manager
 
     function searchTable($table, $columnLikes, $mot)
     {
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         $condition = "";
         $values = [];
         foreach ($columnLikes as $value) {
@@ -364,7 +364,7 @@ class Manager
 
     function updateTable($table, $data, $id)
     {
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         $setColumn = "";
         $values = [];
         foreach ($data as $key => $value) {
@@ -380,11 +380,11 @@ class Manager
         $requete = $connexion->prepare($sql);
         $requete->execute($values);
     }
-
+// -----------------------------------------
     function insertTable($table, $data)
     {
         //---initialisation des variables
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         $column = "";
         $pi = ""; //   les points d'interrogation
         $values = [];  // tableau pour la method execute
@@ -409,11 +409,12 @@ class Manager
         $requete = $connexion->prepare($sql);
         $requete->execute($values);
     }
+// -----------------------------------------
 
 
     function findByIdTable($nomTable, $id)
     {
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         // valeur retouner par la fontion $this->connexion() du fichier myFct.
         $sql = "select * from $nomTable where id=?";
         // Ecrire la requete sql correspondante
@@ -428,7 +429,7 @@ class Manager
 
     function deleteByIdTable($nomTable, $id)
     {
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         $sql = "delete from $nomTable where id=?";
         $requete = $connexion->prepare($sql);
         $requete->execute([$id]);
@@ -438,7 +439,7 @@ class Manager
     function listTable($nomTable)
     {
         $sql = "select * from $nomTable";
-        $connexion = $this->connexion();
+        $connexion = self::getConnexion();
         $requete = $connexion->prepare($sql);
         $requete->execute();
         $tables = $requete->fetchAll(PDO::FETCH_ASSOC);

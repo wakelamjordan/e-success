@@ -120,6 +120,16 @@ class UserManager extends Manager
         // // exit;
         // $this->request($sql,$data);
     }
+    //recherche par id
+    public function findById($id){
+        $variables=[
+            'id'=>$id,
+        ];
+        $m=new Manager;
+        $result=$m->select($this->table,$variables);
+
+        return $result;
+    }
 
     // ------------------------------------------------------------------------------------
 
@@ -158,14 +168,14 @@ class UserManager extends Manager
         $this->deleteById('user', $id);
     }
 
-    public function findById($id, $type = "obj")
-    {
-        $resultat = $this->findByIdTable('user', $id);
-        if ($type == "obj") {
-            $objet = new User($resultat);
-            return $objet;
-        } else {
-            return $resultat;
-        }
-    }
+    // public function findById($id, $type = "obj")
+    // {
+    //     $resultat = $this->findByIdTable('user', $id);
+    //     if ($type == "obj") {
+    //         $objet = new User($resultat);
+    //         return $objet;
+    //     } else {
+    //         return $resultat;
+    //     }
+    // }
 }
