@@ -14,7 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
     <script src="./Public/js/myScript.js" defer></script>
-    <script src="./Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- bloc le dropdown de parametres -->
+    <!-- <script src="./Public/style/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
