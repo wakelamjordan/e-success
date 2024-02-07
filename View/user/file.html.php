@@ -68,10 +68,14 @@
         });
 
         if (count > 1) {
-            alert("Pour modifier veuillez sélectionner qu'un seul compte.");
+            alert("Pour afficher veuillez sélectionner qu'un seul compte.");
             return;
         };
         let url = `user&action=show&id=${id}`;
+
+        // console.log(url);
+
+        // return;
 
         let xhr = new XMLHttpRequest();
 
