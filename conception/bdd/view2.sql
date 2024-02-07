@@ -62,3 +62,26 @@ desc V_people_all;
 | fixe           | varchar(255) | YES  |     | NULL                |       |
 | mobile         | varchar(255) | YES  |     | NULL                |       |
 +----------------+--------------+------+-----+---------------------+-------+
+
+
+------------------------------------------------------
+CREATE VIEW V_userGestion as
+SELECT u.id,path, phone, mail,password, name, surname, date_birth, roles,last_connexion, date_create FROM photo ph, people p , user u WHERE ph.id=p.id_photo AND p.id=u.id_people;
+
+desc V_userGestion;
+
+
++----------------+--------------+------+-----+---------------------+-------+
+| Field          | Type         | Null | Key | Default             | Extra |
++----------------+--------------+------+-----+---------------------+-------+
+| path           | varchar(255) | NO   |     | NULL                |       |
+| phone          | varchar(255) | YES  |     | NULL                |       |
+| mail           | varchar(255) | NO   |     | NULL                |       |
+| password       | varchar(255) | NO   |     | NULL                |       |
+| name           | varchar(255) | NO   |     | NULL                |       |
+| surname        | varchar(255) | NO   |     | NULL                |       |
+| date_birth     | date         | NO   |     | NULL                |       |
+| roles          | longtext     | YES  |     | '["ROLE_USER"]'     |       |
+| last_connexion | datetime     | YES  |     | current_timestamp() |       |
+| date_create    | datetime     | NO   |     | NULL                |       |
++----------------+--------------+------+-----+---------------------+-------+

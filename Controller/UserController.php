@@ -68,7 +68,7 @@ class UserController extends MyFct
     public function show($id)
     {
         // print_r($_GET);
-        $u=new UserManager;
+        $u=new V_userGestionManager;
 
         $result=$u->findById($id);
 
