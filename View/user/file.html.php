@@ -245,13 +245,17 @@
             // mise des donné dans les input
             insertValueInput(donne);
 
+            password.value='..........';
+
             let roleUser = JSON.parse(donne.roles);
+            console.log(donne.roles);
+            console.log(roleUser);
 
             xhr('GET', 'user&action=listRole', (roles) => {
                 let lignes = '';
                 let checked = '';
 
-                // console.log(roleUser);
+            // console.log(roles);
 
 
                 roles.forEach((role) => {
