@@ -66,7 +66,7 @@
                         <!-- photo -->
                         <div class="mb-3 col-lg d-flex flex-column justify-content-around">
                             <div class="w-100 d-flex justify-content-center my-3">
-                                <img src="./Public/upload/user_default.svg" class="img-fluid rounded-top w-25" alt="" />
+                                <img id="userImg" src="" class="img-fluid rounded-top w-50" alt="" />
                             </div>
 
                             <!-- <label for="" class="form-label">Choisissez une image</label> -->
@@ -254,7 +254,7 @@
 
 
                         roleUser.forEach((test) => {
-                            console.log(test);
+                            // console.log(test);
                             if (test == libelle) {
                                 checked = `checked`;
                             }else{
@@ -276,6 +276,9 @@
                     })
 
                     roleTbody.innerHTML = lignes;
+
+                    userImg.src=`./Public/upload/${donne.path}`;
+
 
                     // for (role in roles) {
                     // }
@@ -346,7 +349,7 @@
 
 
                         roleUser.forEach((test) => {
-                            console.log(test);
+                            // console.log(test);
                             if (test == libelle) {
                                 checked = `checked`;
                             }else{
@@ -368,6 +371,10 @@
                     })
 
                     roleTbody.innerHTML = lignes;
+
+                    userImg.src=`./Public/upload/${donne.path}`;
+
+                    // consol.log(userImg);
 
                     // for (role in roles) {
                     // }
