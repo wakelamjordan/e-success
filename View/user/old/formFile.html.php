@@ -5,7 +5,7 @@
     </div>
     <div>
         <label for="login">LOGIN</label>
-        <input type="text" id="login" value="<?=$login?>" name="login" <?=$disabled?>>
+        <input type="email" id="login" value="<?=$login?>" name="login" <?=$disabled?>>
     </div>
     <div >
         <label for="photo">PHOTO</label>

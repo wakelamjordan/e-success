@@ -12,7 +12,7 @@ class RoleManager extends Manager
             SELECT 
                 *               
             FROM 
-                role;
+                $this->table;
             ";
 
         $result = $this->request($sql);
@@ -235,9 +235,9 @@ class RoleManager extends Manager
     //     $this->updateTable('role',$data,$id);
     // }
     // // -------------------------
-    public function insert($data){
-        $this->insertTable('role',$data);
-    }
+    // public function insert($data){
+    //     $this->insertTable('role',$data);
+    // }
     // // ---------------------------
 
     // public function findAll(){

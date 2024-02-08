@@ -10,7 +10,7 @@
                 <div class="mb-3 col-md-6">
                     <label for="mail" class="form-label">Mail :</label>
 
-                    <input type="text" class="form-control" name="mail" id="mail" aria-describedby="helpMail" placeholder="" required />
+                    <input type="email" class="form-control" name="mail" id="mail" aria-describedby="helpMail" placeholder="" required />
 
                     <small id="helpMail" class="form-text text-muted d-none">champ mail</small>
                 </div>

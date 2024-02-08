@@ -29,7 +29,7 @@ class UserController extends MyFct
                 break;
             case 'modify':
                 if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
-                $this->modifier($id);
+                $this->show($id);
                 break;
             case 'insert':
                 $this->inserer();
@@ -58,21 +58,36 @@ class UserController extends MyFct
                 if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->supprimerUser($id);
                 break;
+            case 'listRole':
+                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                $this->listRole();
+                break;
         }
     }
     // public function userConnexion(){
     // }
     // public function inscription(){
+    //pour récupérer tout les roles possible
+    public function listRole()
+    {
+        $r=new RoleManager;
+
+        $result=$r->findAll();
+
+        $result=json_encode($result);
+
+        echo $result;
+    }
 
     // }
     public function show($id)
     {
         // print_r($_GET);
-        $u=new V_userGestionManager;
+        $u = new V_userGestionManager;
 
-        $result=$u->findById($id);
+        $result = $u->findById($id);
 
-        $result=json_encode($result);
+        $result = json_encode($result);
 
         echo $result;
     }
