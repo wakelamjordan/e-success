@@ -16,7 +16,7 @@
             <table class="table table-hover table-striped text-center align-middle">
                 <thead class="table-dark">
                     <tr>
-                        <th class="col-1 position-sticky top-0 m-0 " scope="col">
+                        <th class="col-1 position-sticky top-0" scope="col">
                             <!-- <div class="form-check"> -->
                             <input class="form-check-input" type="checkbox" value="" id="select_all" />
                             <!-- <label class="form-check-label" for="">sélectionner tout</label> -->
@@ -43,6 +43,13 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
+                <tfoot>
+                    <tr class="table-dark">
+                        <td colspan="88" class="position-sticky bottom-0 m-0">
+                            <?=$nbr?> comptes
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
         <!-- <input type="text" value="oooooo" id="caca"> -->
@@ -66,7 +73,7 @@
                         <!-- photo -->
                         <div class="mb-3 col-lg d-flex flex-column justify-content-around">
                             <div class="w-100 d-flex justify-content-center my-3">
-                                <img id="userImg" src="" class="img-fluid rounded-top w-50" alt="" />
+                                <img id="userImg" src="" class="img-fluid rounded w-50" alt="" />
                             </div>
 
                             <!-- <label for="" class="form-label">Choisissez une image</label> -->
@@ -241,28 +248,28 @@
             let roleUser = JSON.parse(donne.roles);
 
             xhr('GET', 'user&action=listRole', (roles) => {
-                    let lignes = '';
-                    let checked = '';
+                let lignes = '';
+                let checked = '';
 
-                    // console.log(roleUser);
-
-
-                    roles.forEach((role) => {
-                        let id = role.id;
-                        let rang = role.rang;
-                        let libelle = role.libelle;
+                // console.log(roleUser);
 
 
-                        roleUser.forEach((test) => {
-                            // console.log(test);
-                            if (test == libelle) {
-                                checked = `checked`;
-                            }else{
-                                checked='';
-                            }
-                            // console.log(test + " " + libelle+" "+checked);
-                        })
-                        lignes += `
+                roles.forEach((role) => {
+                    let id = role.id;
+                    let rang = role.rang;
+                    let libelle = role.libelle;
+
+
+                    roleUser.forEach((test) => {
+                        // console.log(test);
+                        if (test == libelle) {
+                            checked = `checked`;
+                        } else {
+                            checked = '';
+                        }
+                        // console.log(test + " " + libelle+" "+checked);
+                    })
+                    lignes += `
                             <tr>
                                 <td>
                                     <label class="list-group-item">
@@ -273,17 +280,17 @@
                                 <td class="text-center"><label for="role${id}">${libelle}</label></td>
                             </tr> 
                         `;
-                    })
-
-                    roleTbody.innerHTML = lignes;
-
-                    userImg.src=`./Public/upload/${donne.path}`;
-
-
-                    // for (role in roles) {
-                    // }
-
                 })
+
+                roleTbody.innerHTML = lignes;
+
+                userImg.src = `./Public/upload/${donne.path}`;
+
+
+                // for (role in roles) {
+                // }
+
+            })
         });
 
 
@@ -352,8 +359,8 @@
                             // console.log(test);
                             if (test == libelle) {
                                 checked = `checked`;
-                            }else{
-                                checked='';
+                            } else {
+                                checked = '';
                             }
                             // console.log(test + " " + libelle+" "+checked);
                         })
@@ -372,7 +379,7 @@
 
                     roleTbody.innerHTML = lignes;
 
-                    userImg.src=`./Public/upload/${donne.path}`;
+                    userImg.src = `./Public/upload/${donne.path}`;
 
                     // consol.log(userImg);
 
