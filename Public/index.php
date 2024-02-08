@@ -22,9 +22,10 @@ if (!$_SESSION) {
 
 // print_r($_SESSION['roles']);
 // exit;
-
-require_once("../Service/extra.php");
-spl_autoload_register('charger');
+// die;
+// require_once("../Service/extra.php");
+// spl_autoload_register('charger');
+require "../vendor/autoload.php";
 // require '../View/base.html.php';
 $path = 'acceuil';
 extract($_GET);
@@ -32,7 +33,15 @@ extract($_GET);
 // print_r($_GET);
 // echo $path;
 $nameController = ucfirst($path) . "Controller";
-$fileController = "../Controller/$nameController.php";
+$fileController = "../src/Controller/$nameController.php";
+
+$fileController=str_replace('\\','/',$fileController);
+
+// var_dump($fileController);
+
+$nameController="\\App\\Controller\\".$nameController;
+// var_dump($nameController);
+// die;
 
 if (file_exists($fileController)) {
     $x = new $nameController();

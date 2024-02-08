@@ -1,3 +1,4 @@
+<?php use App\Service\MyFct;?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +73,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="user">User</a></li>
                                     <li><a class="dropdown-item" href="role">Role</a></li>
+                                    <li><a class="dropdown-item" href="xlsx">Xlsx</a></li>
                                 </ul>
                             </li>
                             <?php endif; ?>
