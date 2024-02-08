@@ -120,6 +120,40 @@ class UserManager extends Manager
         // // exit;
         // $this->request($sql,$data);
     }
+    // insertion nouvelle user
+    public function updateLast_connexion($id)
+    {
+        // echo 'eeeee';
+        // print_r($data);
+        // $last_id = Manager::getConnexion();
+        // $last_id = $last_id->inser();
+
+        $variables_set = [
+            'last_connexion' => date("Y-m-d H:i:s"),
+        ];
+
+        $variables_conditions = [
+            'id' => $id,
+        ];
+
+        // $data['id_people']=$last_id;
+
+        // var_dump($data);
+
+        // exit;
+
+
+        $this->update($this->table, $variables_set,$variables_conditions);
+
+        // var_dump($last_id);
+        // $sql = "
+        // INSERT INTO user (mail,password,id_people) VALUES (?,?,$last_id);
+        // ";
+
+        // // var_dump($data);
+        // // exit;
+        // $this->request($sql,$data);
+    }
     //recherche par id
     public function findById($id){
         $variables=[

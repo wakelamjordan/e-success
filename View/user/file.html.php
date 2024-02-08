@@ -46,7 +46,7 @@
                 <tfoot>
                     <tr class="table-dark">
                         <td colspan="88" class="position-sticky bottom-0 m-0">
-                            <?=$nbr?> comptes
+                            <?= $nbr ?> comptes
                         </td>
                     </tr>
                 </tfoot>
@@ -245,17 +245,17 @@
             // mise des donné dans les input
             insertValueInput(donne);
 
-            password.value='..........';
+            password.value = '..........';
 
             let roleUser = JSON.parse(donne.roles);
-            console.log(donne.roles);
-            console.log(roleUser);
+            // console.log(donne.roles);
+            // console.log(roleUser);
 
             xhr('GET', 'user&action=listRole', (roles) => {
                 let lignes = '';
                 let checked = '';
 
-            // console.log(roles);
+                // console.log(roles);
 
 
                 roles.forEach((role) => {
@@ -341,7 +341,11 @@
 
                 insertValueInput(donne, true);
 
-                //spécificité à donne.roles
+                // //spécificité à donne.roles
+                // password.value = '..........';
+                // //formatage fr date 
+                // var dateObj=new Date(last_connexion.value);
+                // last_connexion.value=dateObj.toLocaleString('fr-FR');
 
                 // ["ROLE_USER","ROLE_ADMIN"] en pars ça devrait être utilisable
                 // console.log(JSON.parse(donne.roles));
@@ -482,8 +486,28 @@
 
             element = document.getElementById(item);
 
+            // console.log(item);
+
+            var date;
+
             if (element !== null) {
-                element.value = donne[item];
+
+                // element.value = donne[item];
+                //si la donné récupéré est pas une date 
+                // d'abord créer objet date à partir de la valeur
+                date = new Date(donne[item]);
+                // vérifier si date est pas une date, ou tester dans la valeur si il y a un format de d(chiffre de 0 à 9) 2 fois séparé par un :
+                if (isNaN(date.getTime()) || !/\d{2}:\d{2}:\d{2}/.test(donne[item])) {
+                    element.value = donne[item];
+                } else {
+                    // console.log(donne[item]);
+                    // mise de la valeur au format fr
+                    let dateFr = date.toLocaleString('fr-FR');
+                    element.value = dateFr;
+                }
+
+
+                // element.value = donne[item];
                 if (disable === true) {
                     element.disabled = true;
                 } else {

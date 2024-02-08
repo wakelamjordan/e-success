@@ -248,7 +248,7 @@ class UserController extends MyFct
         // controle de l'identifiant retourné dans la bdd.user.mail/phone
         extract($_POST);
 
-        $sql = "SELECT mail, phone FROM user WHERE mail like ? OR phone like ?";
+        $sql = "SELECT id, mail, phone FROM user WHERE mail like ? OR phone like ?";
 
         $variables = [
             $mail,
@@ -258,9 +258,16 @@ class UserController extends MyFct
         $m = new Manager;
         $exist = $m->request($sql, $variables);
 
+        // print_r($exist);
+        // exit;
+
         if ($exist == true) {
 
             //si existant on charge le formulaire de connexion qui demandera le mot de pass et mettra la valeur de input mail/phone précédement saisi dans l'identifiant
+            // insertion dans la user nouvelle date 
+            $um=new UserManager;
+            $um->updateLast_connexion($exist['id']);
+            //--------------------------------------
             $file = "../View/ap/formLogin.html.php";
 
             $variables = [

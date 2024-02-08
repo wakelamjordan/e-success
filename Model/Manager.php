@@ -123,7 +123,9 @@ class Manager
             $m->throwMessage("érreur");
         }
 
+        // var_dump($variables_set);
         // var_dump($values);
+        // var_dump($sql);
         // exit;
 
         $result = $this->request($sql, $values);
