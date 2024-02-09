@@ -1,5 +1,6 @@
 <?php
 session_start();
+//toujours en tout premier session start
 // require "./img/application.png";
 
 error_reporting(E_ALL & ~E_DEPRECATED);
