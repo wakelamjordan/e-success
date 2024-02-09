@@ -23,7 +23,7 @@ class ClientController extends MyFct
     public function client()
     {
 
-        $file = "../View/produit/file.html.php";
+        $file = "../View/client/file.html.php";
         $variables = [
             "title" => "Client",
             "p" => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum, dolorum!"
