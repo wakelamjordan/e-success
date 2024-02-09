@@ -1,4 +1,5 @@
 <?php
+session_start();
 // require "./img/application.png";
 
 error_reporting(E_ALL & ~E_DEPRECATED);
@@ -8,16 +9,17 @@ ini_set("display_errors", 1);
 
 // $crypter=new MyFct;
 // $crypter=$crypter->crypter('1234');
-// echo $crypter;
+// // echo $crypter;
+// session_destroy();
+
+// print_r($_SESSION);
 // die;
 
-session_start();
 if (!$_SESSION) {
     $_SESSION['login'] = 'visiteur';
     $_SESSION['roles'] = json_encode(['ROLE_VISITEUR']);
 }
 
-// session_destroy();
 // exit;
 
 // print_r($_SESSION['roles']);
@@ -35,11 +37,11 @@ extract($_GET);
 $nameController = ucfirst($path) . "Controller";
 $fileController = "../src/Controller/$nameController.php";
 
-$fileController=str_replace('\\','/',$fileController);
+$fileController = str_replace('\\', '/', $fileController);
 
 // var_dump($fileController);
 
-$nameController="\\App\\Controller\\".$nameController;
+$nameController = "\\App\\Controller\\" . $nameController;
 // var_dump($nameController);
 // die;
 

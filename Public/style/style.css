@@ -4,9 +4,8 @@
 
 /* hauteur réduite du tableau gestion utilisateur pour pouvoir scroll le tbody */
 .tbl-fixed {
-    max-height: 70vh;
+  max-height: 70vh;
 }
-
 
 body {
   /* background-color: aqua; */
@@ -115,54 +114,55 @@ ul li:hover {
   padding-top: 15px;
 }
 
-#services{
-    background-color: rgb(246, 246, 246);
-    padding-top: 40px;
-    margin-top: -50px;
+#services {
+  background-color: rgb(246, 246, 246);
+  padding-top: 40px;
+  margin-top: -50px;
 }
 
 /* PRODUIT */
 
-.container{
-    margin-top: 100px;
-    margin-left:130px;
+.container {
+  margin-top: 100px;
+  /* ça sert vraiment? */
+  /* margin-left:130px; */
 }
 
 .nouveau {
-    background-color: green;
-    width: 100px;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
+  background-color: green;
+  width: 100px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 
-.col-md-7{
-    color: black;
+.col-md-7 {
+  color: black;
 }
 
 .green-star {
-    color: green;
+  color: green;
 }
 
-.price{
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
-    padding-top: 20px;
+.price {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
 }
 
 .description {
-    max-width: 600px; 
-    margin: 0 auto;
-    text-align: justify;
-    margin-right: 200px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: justify;
+  margin-right: 200px;
 }
 
 .col {
-    font-size: 1.5em; 
-    margin-right: 1px; 
-     }
+  font-size: 1.5em;
+  margin-right: 1px;
+}
 
-     .comment {
-        margin-bottom: 20px;
-    }
+.comment {
+  margin-bottom: 20px;
+}

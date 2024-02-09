@@ -29,7 +29,7 @@ use App\Service\MyFct; ?>
 </head>
 
 
-<body class="d-flex flex-column ">
+<body class="d-flex flex-column">
     <div class="">
         <div class="promo">
             <p>Livraison GRATUITE dans toute L'EUROPE🌎</p>
@@ -104,7 +104,7 @@ use App\Service\MyFct; ?>
                                 <!-- <a href="user&action=login" class="nav-link">Mon Compte</a> -->
                                 <div class="dropdown open">
                                     <a href="" class="btn btn-secondary dropdown-toggle w-100 " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <?= $_SESSION['surname'] ?>
+                                        <?= $_SESSION['username'] ?>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg-end w-100" aria-labelledby="triggerId">
                                         <a class="dropdown-item" href="login&action=logout">Se deconnecter</a>

@@ -124,7 +124,7 @@ class LoginController extends MyFct
             $_SESSION = [
                 'login' => $u['mail'],
                 'roles' => $u['roles'],
-                'surname' => $p['surname'],
+                'username' => $p['surname'],
             ];
 
             //redirection vers la page 'acceuil

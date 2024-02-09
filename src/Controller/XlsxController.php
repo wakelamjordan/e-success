@@ -11,26 +11,29 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class XlsxController extends MyFct
 {
-    public function __construct()
+    public function __construct(
+        private string $table=''
+    )
     {
         if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
         $action = '';
         extract($_GET);
+        // die;
         switch ($action) {
             case 'extract':
-                $this->extract();
+                $this->extract($table);
                 break;
             default:
                 $this->choice();
         }
     }
-    private function extract()
+    private function extract($table)
     {
         $sql = "
             SELECT
                 *
             FROM
-                people
+                $table
         ";
 
         $request = new Manager;
