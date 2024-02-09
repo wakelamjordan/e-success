@@ -65,8 +65,9 @@ desc V_people_all;
 
 
 ------------------------------------------------------
+drop VIEW V_userGestion;
 CREATE VIEW V_userGestion as
-SELECT u.id,path, phone, mail, name, surname, date_birth, roles,last_connexion, date_create FROM photo ph, people p , user u WHERE ph.id=p.id_photo AND p.id=u.id_people;
+SELECT u.id id_user,path, phone, mail, name, surname, date_birth, roles,last_connexion, date_create FROM photo ph, people p , user u WHERE ph.id=p.id_photo AND p.id=u.id_people;
 
 desc V_userGestion;
 

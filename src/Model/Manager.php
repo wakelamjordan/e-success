@@ -81,10 +81,13 @@ class Manager
             $sql .= $where;
         }
 
-        // var_dump($sql);
-        // exit;
 
+        // var_dump($values);
+        // die;
         $result = $this->request($sql, $values);
+
+        // var_dump($result);
+        // die;
 
         // $result=empty($variables)?$this->request($sql):null;
 
@@ -145,6 +148,12 @@ class Manager
     public function request($sql, $variables = [])
     {
         $connexion = self::getConnexion();
+
+        // var_dump($sql);
+        // var_dump($variables);
+
+        // die;
+
 
         $request = $connexion->prepare($sql);
 

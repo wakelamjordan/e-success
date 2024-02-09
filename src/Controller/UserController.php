@@ -35,9 +35,21 @@ class UserController extends MyFct
             case 'insert':
                 $this->inserer();
                 break;
+
+
             case 'save':
+
+
+                // echo 'save';
+                // die;
+
+
                 $this->save($_POST, $_FILES);
                 break;
+
+
+
+
             case 'delete':
                 // if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->supprimerUser($id);
@@ -53,7 +65,15 @@ class UserController extends MyFct
     }
     public function save($post, $file)
     {
-        echo ("file");
+        // extract($_POST);
+
+        $id_user=$_POST['id_user'];
+
+        $variables=
+        
+        $v=new V_userGestionManager;
+        $v->insertById($_POST['id_user'],);
+ 
     }
     //pour récupérer tout les roles possible
     public function listRole()
@@ -69,6 +89,8 @@ class UserController extends MyFct
     // }
     public function show($id)
     {
+
+        // die;
         // print_r($_GET);
         $u = new V_userGestionManager;
 

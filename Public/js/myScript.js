@@ -1,45 +1,95 @@
 // ----------------Jordan
 // -------------user
 // si input change ça fait un update, si input non change ça fait rien
-function update() {
-  const form = document.forms.namedItem("formUser");
-
-
-  let confirmation = confirm("Confirmez l'enregistrement?");
-  if (!confirmation) {
-    return;
-  }
-
-  form.addEventListener("submit", (event) => {
-    const formData = new FormData(form);
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","user&action=save",true);
-    xhr.send(formData);
+//on écsoute le formulaire par son id, et à l'evenement submit
+document.addEventListener("DOMContentLoaded",function(){
+  formUser.addEventListener("submit", (event) => {
+    //on anule son comportement par défaut
     event.preventDefault();
-    // xhr("POST", "user&action=save", success, formData);
+    //on demande si on est sur
+    if (confirm("Confirmez la modification?")) {
+      //on est sur
+      let formData=new FormData(formUser);
+  
+      //ajout avec append de id_user parce qu'il est en d_none il n'est pas pris en compte par formUser
+      formData.append('id_user',id_user.value);
+
+      // xhr('POST','user&action=save',(response)=>{
+      //   console.log(response);
+      // },formData);
+
+
+      // la fonction que j'avais crée n'est pas utilisable parce qu'elle crée un form data, faudra l'adapter pour que toutes les fonction utilise le formdata automatique du formulaire
+      let xhr=new XMLHttpRequest;
+
+      xhr.open('POST', 'user&action=save');
+
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              // console.log(xhr.responseText);
+              // let donne = xhr.responseText;
+  
+              let donne = JSON.parse(xhr.responseText);
+              // console.log(donne);
+              // alert(donne.mail);
+              callback(donne);
+          }
+      };
+
+      xhr.send(formData);
+  
+      // console.log(formData.get('id_user'));
+      // console.log(formData.get('name'));
+      alert("modifié");
+    }
   });
-  //préparation du tableau avec comme clé les id des input à tester et à compléter par leur valeur
-  //   file_photo
-  //   mail
-  //   phone
-  //   password
-  //   check box id role[id] value id
-  //   name
-  //   surname
-  //   date_birth
-  //   last_connexion
-  //   date_create
-  //   let modal = document.querySelectorAll("#exampleModal input");
-  //   // let input=document.getElementsByTagName('input');
-  //   let inputChange = {};
-  //   modal.forEach((input) => {
-  //     input.addEventListener("input", function (event) {
-  //       inputChange = push(input.id);
-  //     });
-  //   });
-  //   console.log(inputChange);
-  //   let data = {};
-}
+})
+// function update() {
+
+//   // a_valide.addEventListener("change", (event) => {
+//   //   event.preventDefault();
+//   // });
+
+//   // let confirmation = confirm("Confirmez l'enregistrement?");
+//   // if (!confirmation) {
+//   //   return;
+//   // }
+
+//   // const form = document.forms.namedItem("formUser");
+
+//   // form.addEventListener("submit", (event) => {
+//   //   const formData = new FormData(form);
+
+//   //   let xhr = new XMLHttpRequest();
+
+//   //   xhr.open("POST", "user&action=save", true);
+
+//   //   xhr.send(formData);
+
+//     // xhr("POST", "user&action=save", success, formData);
+//   };
+//préparation du tableau avec comme clé les id des input à tester et à compléter par leur valeur
+//   file_photo
+//   mail
+//   phone
+//   password
+//   check box id role[id] value id
+//   name
+//   surname
+//   date_birth
+//   last_connexion
+//   date_create
+//   let modal = document.querySelectorAll("#exampleModal input");
+//   // let input=document.getElementsByTagName('input');
+//   let inputChange = {};
+//   modal.forEach((input) => {
+//     input.addEventListener("input", function (event) {
+//       inputChange = push(input.id);
+//     });
+//   });
+//   console.log(inputChange);
+//   let data = {};
+
 function add() {
   alert("add");
   // affiche un formulaire de création d'user
@@ -116,7 +166,7 @@ function modify(id = null) {
   // a_delete.style.display = 'none';
   a_modify.style.display = "none";
 
-    // a_valide.onclick = () => update();
+  // a_valide.onclick = () => update();
 }
 
 function view() {
@@ -147,6 +197,8 @@ function view() {
       // mise des donné dans les input
 
       insertValueInput(donne, true);
+
+      console.log(donne);
 
       // //spécificité à donne.roles
       // password.value = '..........';
