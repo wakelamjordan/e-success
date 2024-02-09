@@ -134,8 +134,8 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
           </div>
 
           <div class="row">
-            <div class="col-12 col-md-12 col-lg-4">
-              <div class="card text-white text-center bg-dark pb-2">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
+              <div class="card text-white text-center bg-dark pb-2 h-100">
                 <div class="card-body">
                   <i class="bi bi-subtract"></i>
                   <h3 class="card-title">Meilleure Qualité</h3>
@@ -144,8 +144,8 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-12 col-lg-4">
-              <div class="card text-white text-center bg-dark pb-2">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
+              <div class="card text-white text-center bg-dark pb-2 h-100">
                 <div class="card-body">
                 <i class="bi bi-box-seam-fill"></i>
                   <h3 class="card-title">Livraison Express</h3>
@@ -154,8 +154,8 @@ Découvrez notre équipement de musculation révolutionnaire, conçu pour vous p
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-12 col-lg-4">
-              <div class="card text-white text-center bg-dark pb-2">
+            <div class="col-12 col-md-12 col-lg-4 my-2">
+              <div class="card text-white text-center bg-dark pb-2 h-100">
                 <div class="card-body">
                 <i class="bi bi-chat-right-text"></i>
                   <h3 class="card-title">Service Client</h3>
