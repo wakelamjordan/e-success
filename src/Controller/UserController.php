@@ -18,6 +18,7 @@ class UserController extends MyFct
 {
     function __construct()
     {
+        if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
         // par defaut on met action sur liste
         $action = 'liste';
         // on extract get pour avoir l'action si jamais elle est renseigné dans l'url
@@ -25,12 +26,10 @@ class UserController extends MyFct
         // et on switch sur cette action
         switch ($action) {
             case 'show':
-                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
-
                 $this->show($id);
                 break;
             case 'modify':
-                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                // if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->show($id);
                 break;
             case 'insert':
@@ -40,20 +39,21 @@ class UserController extends MyFct
                 $this->save($_POST, $_FILES);
                 break;
             case 'delete':
-                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                // if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->supprimerUser($id);
                 break;
             case 'listRole':
-                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                // if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->listRole();
                 break;
             default:
-                if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
+                // if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
                 $this->liste();
         }
     }
-    public function save($post,$file){
-        echo("file");
+    public function save($post, $file)
+    {
+        echo ("file");
     }
     //pour récupérer tout les roles possible
     public function listRole()

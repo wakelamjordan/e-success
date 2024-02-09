@@ -16,20 +16,20 @@ class AcceuilController extends MyFct
         $action = '';
         extract($_GET);
         switch ($action) {
-            case 'client':
-                // echo "produit";
-                if ($this->notGranted('ROLE_SAV') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
-                $this->client();
-                break;
-            case 'produit':
-                if ($this->notGranted('ROLE_CAISSE') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
-                // echo "produit";
-                $this->produit();
-                break;
+            // case 'client':
+            //     // echo "produit";
+            //     // if ($this->notGranted('ROLE_SAV') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
+            //     $this->client();
+            //     break;
+            // case 'produit':
+            //     // if ($this->notGranted('ROLE_CAISSE') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
+            //     // echo "produit";
+            //     $this->produit();
+            //     break;
                 //partie connexion
 
-                $this->seDeconnecter();
-                break;
+                // $this->seDeconnecter();
+                // break;
 
             default:
                 $this->default_acceuil();

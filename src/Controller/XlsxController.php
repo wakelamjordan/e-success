@@ -13,6 +13,7 @@ class XlsxController extends MyFct
 {
     public function __construct()
     {
+        if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
         $action = '';
         extract($_GET);
         switch ($action) {

@@ -13,11 +13,11 @@ class ProduitController extends MyFct
     private $obj = 'Acceuil';
     function __construct()
     {
+        if ($this->notGranted('ROLE_CAISSE') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
         $action = '';
         extract($_GET);
         switch ($action) {
             default:
-                if ($this->notGranted('ROLE_CAISSE') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
                 $this->produit();
         }
     }

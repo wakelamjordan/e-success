@@ -125,7 +125,7 @@ use App\Service\MyFct; ?>
         </header>
     </div>
 
-    <main class="container-fluid my-3">
+    <main class="container my-3">
         <?= $content ?>
     </main>
 
