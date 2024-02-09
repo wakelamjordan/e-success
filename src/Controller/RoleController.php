@@ -10,6 +10,7 @@ class RoleController extends MyFct
 {
     function __construct()
     {
+        if ($this->notGranted('ROLE_ADMIN')) $this->throwMessage("Vous n'avez pas <br> le droit d'utiliser cette action!");
 
         $action = 'list';
 

@@ -10,7 +10,6 @@ use App\Model\AcceuilManager;
 
 class ProduitController extends MyFct
 {
-    private $obj = 'Acceuil';
     function __construct()
     {
         if ($this->notGranted('ROLE_CAISSE') && $this->notGranted('ROLE_ADMIN')) $this->throwMessage('Vous n\'avez pas accés à cette page');
