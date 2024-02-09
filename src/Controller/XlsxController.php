@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Model\Manager;
 use App\Service\MyFct;
 use App\Model\AcceuilManager;
-use App\Model\Manager;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -16,30 +17,47 @@ class XlsxController extends MyFct
         extract($_GET);
         switch ($action) {
             case 'extract':
-                $this->extract($table);
+                $this->extract();
                 break;
             default:
                 $this->choice();
         }
     }
-    private function extract($table){
+    private function extract()
+    {
+        $sql = "
+            SELECT
+                *
+            FROM
+                people
+        ";
 
+        $request = new Manager;
+        $result = $request->request($sql);
+        $spreadsheet = new Spreadsheet;
+        // $spreadsheet = IOFactory::load("people.xlsx");
+        $sheet = $spreadsheet->getActiveSheet();
 
-        echo($table);
-        die;
-        $request=new Manager;
-        $result=$request->request($table);
+        $row = 1;
+        // $nbre=0;
 
-        var_dump($result);
+        foreach ($result as $value) {
+            extract($value);
 
+            // $sheet->insertNewRowBefore($row);
 
+            $sheet->setCellValue("A$row", $id);
+            $sheet->setCellValue("B$row", $name);
+            $sheet->setCellValue("C$row", $surname);
+            $sheet->setCellValue("D$row", $date_birth);
+            $sheet->setCellValue("E$row", $place_birth);
 
-        $spreadsheet=new Spreadsheet();
-        $sheet=$spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1','Hello PhpSpreadsheet!');
+            $row++;
+        }
+        // $sheet->setCellValue("A1", "ssss");
 
-        $writer=new Xlsx($spreadsheet);
-        $writer->save('hello_world.xlsx');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('people.xlsx');
     }
     private function choice()
     {

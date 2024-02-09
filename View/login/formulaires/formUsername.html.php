@@ -16,7 +16,7 @@
                     <span id="mailError"></span>
 
                     <small id="helpMail" class="form-text text-muted d-none">champ mail</small>
-                    <a href="ap&action=recuperation">Récupération de compte</a>
+                    <a href="login&action=recuperation">Récupération de compte</a>
 
                 </div>
             </div>

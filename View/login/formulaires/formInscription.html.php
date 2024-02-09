@@ -1,7 +1,7 @@
 <h1 class="text-center"><?= $title ?></h1>
 <h2 class="" id="message"></h2>
 <p class="text-center">Remplissez le formulaire ci-dessous.</p>
-<form action="user&action=validation" id="formInscription" method="post" class="container-lg" >
+<form action="login&action=validation" id="formInscription" method="post" class="container-lg" >
     <!-- <div class=""> -->
     <div class="p-2 border border-1 rounded m-1 " id='identitee'>
         <fieldset>
@@ -17,7 +17,7 @@
                 <!-- password -->
                 <div class="mb-3 col-md-6">
                     <label for="password" class="form-label">Mot de passe :</label>
-                    <input type="text" class="form-control" name="password" id="password" aria-describedby="helpPassword" placeholder="" required />
+                    <input type="password" class="form-control" name="password" id="password" aria-describedby="helpPassword" placeholder="" required />
                     <span id="passwordError"></span>
                     <small id="helpPassword" class="form-text text-muted d-none">champ mot de passe</small>
                 </div>
@@ -50,6 +50,6 @@
                 </div>
             </div>
         </fieldset>
-        <a href="ap&action=recuperation">Récupération de compte</a>
+        <a href="login&action=recuperation">Récupération de compte</a>
     </div>
 </form>

@@ -1,26 +1,38 @@
-// document.getElementById("formInscription").addEventListener("submit", (event) => {
-//     // event.preventDefault();
-//     if (ctrlFieldInscription(event) !== false) {
-//       var formData = new FormData(this);
 
-//       // alert(formData);
+//méthode "GET"ou"POST"
+//url path=xxxx&action=xxxx du controller php qui requêtera le serveur pour echo le résultat qui sera retourné par le callback variable dans laquel le résultat sera mis en valeur
+// data un array qui contien des data à envoyer vers le serveur key=champs de table ou insérer, valeur = données
+function xhr(method, url, callback, data = {}) {
 
-//       var xhr = new XMLHttpRequest();
+    let formData;
 
-//       xhr.onload = function () {
-//         var response = JSON.parse(xhr.responseText);
-//         let message = response.message;
-//         document.getElementById("message").innerHTML = message;
-//       };
-//       xhr.open("POST", "acceuil&action=create");
+    if (Object.keys(data).length === 0) {
+        formData = new FormData();
+        for (item in data) {
+            formData.append(item, data[item]);
+        }
+    }
 
-//       xhr.send(formData);
+    let xhr = new XMLHttpRequest();
 
-//         event.preventDefault();
+    xhr.open(method, url);
 
-//       // (xhr.onload)=>{
-//       //     var response=xhr.responseText;
-//       // };
-//     }
-//   });
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // console.log(xhr.responseText);
+            // let donne = xhr.responseText;
+
+            let donne = JSON.parse(xhr.responseText);
+            // console.log(donne);
+            // alert(donne.mail);
+            callback(donne);
+        }
+    };
+
+    if (formData) {
+        xhr.send(formData);
+    } else {
+        xhr.send();
+    }
+}
 

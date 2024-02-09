@@ -1,4 +1,5 @@
 <!-- ------------------------------------ -->
+
 <div class="d-flex justify-content-around  flex-column position-relative">
     <div class="container">
         <h1 class="my-5 align-middle">Gestion comptes utilisateurs</h1>
@@ -63,10 +64,11 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-md-down modal-xl">
-            <div class="modal-content">
+            <form class="modal-content"enctype="multipart/form-data" method="post" name="formUser">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Compte utilisateur</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalClose"></button>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="exampleModal" aria-label="Close" id="modalClose"></button> -->
                 </div>
                 <div class="modal-body">
                     <div class="row p-0 ">
@@ -151,11 +153,11 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between px-5">
-                    <button type="button" class="col my-1 mx-5 btn btn-warning" data-bs-dismiss="modal" id="a_modify"><i class="fas fa-pencil fs-2"></i></button>
-                    <button type="button" class="col my-1 mx-5 btn btn-success" id="a_valide"><i class="fas fa-check fs-2"></i></button>
+                    <button type="button" class="col my-1 mx-5 btn btn-warning" data-bs-dismiss="modal" id="a_modify" onclick="modify()"><i class="fas fa-pencil fs-2"></i></button>
+                    <button type="submit" class="col my-1 mx-5 btn btn-success" id="a_valide"><i class="fas fa-check fs-2"></i></button>
                     <button type="button" class=" col my-1 mx-5 btn btn-danger" data-bs-dismiss="modal" id="a_delete"><i class="fas fa-trash-can fs-2"></i></button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -164,8 +166,8 @@
 </div>
 
 <script>
-</script>
 
+</script>
 
 
 <!-- ------------------------------------ -->
