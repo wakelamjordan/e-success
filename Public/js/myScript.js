@@ -198,7 +198,7 @@ function view() {
 
       insertValueInput(donne, true);
 
-      console.log(donne);
+      // console.log(donne);
 
       // //spécificité à donne.roles
       // password.value = '..........';

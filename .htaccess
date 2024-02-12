@@ -6,7 +6,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     # .*   tous caratère autorisés 
     # ^ = debut  $= fin   ^(z) (.*)$     
-    RewriteRule ^(.*)$ index.php?path=$1
+    RewriteRule ^(.*)$ index.php?url=$1
 
     RewriteRule    ^$    Public/    [L]
 

@@ -1,6 +1,4 @@
 <?php
-
-use App\Service\router\Router;
 session_start();
 //toujours en tout premier session start
 // require "./img/application.png";
@@ -32,20 +30,27 @@ if (!$_SESSION) {
 // spl_autoload_register('charger');
 require "../vendor/autoload.php";
 // require '../View/base.html.php';
-// $path = 'acceuil';
+$path = 'acceuil';
+extract($_GET);
 
-// die(print_r());
+// print_r($_GET);
+// echo $path;
+$nameController = ucfirst($path) . "Controller";
+$fileController = "../src/Controller/$nameController.php";
 
-//prévoir le cas ou get ne contien pas de url
+$fileController = str_replace('\\', '/', $fileController);
 
-$url=isset($_GET['url'])?$_GET['url']:'/';
+// var_dump($fileController);
 
-$router=new Router($url);
+$nameController = "\\App\\Controller\\" . $nameController;
+// var_dump($nameController);
+// die;
 
-$router->get('/',function(){
-    echo "homepage";
-});
-$router->get('posts/:id',function($id){
-    echo "voila l'article $id";
-});
-$router->run();
+if (file_exists($fileController)) {
+    $x = new $nameController();
+} else {
+    // si aucun controller est trouvé on est redirigé directement vers acceuilController
+    header('location:acceuil');
+    // echo "<h1>Le fichier $fileController n'existe pas!!!!!</h1>";  
+    // die;
+}
